@@ -7,16 +7,12 @@ const express = require('express'),
 
 const router = express.Router();
 
-// const freesoundInternalPrefix = '/freesound';
 const freesoundHost = 'freesound.org';
 const freesoundApiPrefix = '/apiv2';
-const freesoundApiToken = '2rofapnyzy82X90HwjKw56VhDBVIUp8XMq5HWWVI';
+const freesoundApiToken = process.env.FREESOUND_KEY;
 
 const stringFromQuery = (queryObj) => {
   const queryStr = querystring.stringify(queryObj);
-  // const queryStr =
-  //     _.map(  _.pairs(queryObj),
-  //             pair => _.map(pair, encodeURIComponent).join('=')).join('&');
   return queryStr ? '?' + queryStr : '';
 };
 
