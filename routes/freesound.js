@@ -23,14 +23,6 @@ const stringFromQuery = (queryObj) => {
 router.all('/ciccio',() => console.log('cicciobusNew!'));
 
 router.all('*', (req, resp, next) => {
-  console.log({
-    protocol: 'https', host: freesoundHost,
-    path:
-      freesoundApiPrefix + req.url +
-      stringFromQuery(_.extend(req.query, {token: freesoundApiToken})),
-    query: _.extend(req.query, {token: freesoundApiToken}),
-    method: req.method, headers: _.extend(req.headers, {host: freesoundHost})
-  });
   var req2 = https.request({
     protocol: 'https:', host: freesoundHost,
     path:
@@ -38,7 +30,6 @@ router.all('*', (req, resp, next) => {
       stringFromQuery(_.extend( req.query, {token: freesoundApiToken})),
     method: req.method, headers: req.headers
   }, (resp2) => {
-    console.log(resp2);
     resp.writeHead(resp2.statusCode, resp2.headers);
     resp2.on('data', function (d) { resp.write(d); });
     resp2.on('end', function () { resp.end(); });
