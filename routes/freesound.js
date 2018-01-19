@@ -20,15 +20,13 @@ const stringFromQuery = (queryObj) => {
   return queryStr ? '?' + queryStr : '';
 };
 
-router.all('/ciccio',() => console.log('cicciobusNew!'));
-
 router.all('*', (req, resp, next) => {
   var req2 = https.request({
     protocol: 'https:', host: freesoundHost,
     path:
       freesoundApiPrefix + req.url +
-      stringFromQuery(_.extend( req.query, {token: freesoundApiToken})),
-    method: req.method, headers: req.headers
+      stringFromQuery(_.extend(req.query, {token: freesoundApiToken})),
+    method: req.method, headers: _.extend(req.headers, {host: freesoundHost})
   }, (resp2) => {
     resp.writeHead(resp2.statusCode, resp2.headers);
     resp2.on('data', function (d) { resp.write(d); });
