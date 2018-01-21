@@ -5,20 +5,21 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npm update"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miguel76/audioquery-server.git"
+    "url": "git+https://github.com/arianestolfi/audioquery-server.git"
   },
-  "author": "miguel.ceriani@gmail.com",
+  "author": "arianestolfi@gmail.com",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/miguel76/audioquery-server/issues"
+    "url": "https://github.com/arianestolfi/audioquery-server/issues"
   },
-  "homepage": "https://github.com/miguel76/audioquery-server#readme",
+  "homepage": "https://github.com/arianestolfi/audioquery-server#readme",
   "dependencies": {
-    "audioquery": "github:miguel76/audioquery",
+    "audioquery": "github:arianestolfi/audioquery",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "http": "0.0.0",
