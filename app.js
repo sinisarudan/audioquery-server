@@ -20,7 +20,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'node_modules', 'audioquery')));
+//app.use(express.static(path.join(__dirname, 'node_modules', 'audioquery')));
+app.use(express.static(path.join(__dirname, 'audioquery')));
 
 app.use('/freesound', freesoundApiRouter);
 app.use('/users', users);
