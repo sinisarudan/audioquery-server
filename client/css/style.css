@@ -1,0 +1,641 @@
+/* css reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, arial, sans-serif;
+}
+
+input, textarea, keygen, select, button {
+font-size: 12px
+
+}
+
+body {
+    background-color: #efefef;
+}
+ul,
+li {
+    list-style-type: none;
+    list-style-position: outside;
+}
+a {
+    text-decoration: none;
+}
+a:visited {
+    color: #666;
+}
+
+img {
+    color: #fff;
+}
+
+section {
+    float: left;
+}
+.pag {
+    position: absolute;
+    top: 0;
+    /*background-color: #aaa;*/
+    /
+}
+
+.smallimg {
+    width: 200px;
+    height: 50px;
+}
+
+.miniimg {
+    width: 200px;
+    height: 25px;
+}
+
+.result {
+    display: block;
+    width: 200px;
+    float: left;
+    margin: 5px;
+}
+
+.info {
+    font-size: 10px;
+    height: 20px;
+    display: block;
+}
+
+.smalltext {
+        font-size: 10px;
+
+}
+
+.credits {
+    position: relative;
+    display: block;
+    margin:5px 0;
+    font-size: 10px;
+    width: 100%;
+
+}
+
+#recList h5 {
+    font-weight: normal;
+    margin: 5px;
+}
+
+
+#list {
+    width: calc(100% - 250px);
+    height: 100%;
+    overflow: scroll;
+}
+
+#playlist {
+    width: 220px;
+    background-color: #fff;
+    
+}
+
+.players {
+    outline: 1px solid black;
+}
+
+
+
+#menu {
+    width: 100%;
+    height: 0px;
+    z-index: 50;
+    position: absolute;
+}
+#menu ul {
+    width: 200px;
+}
+.fx {
+    overflow: hidden;
+    position: relative;
+}
+.fx .zoom {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.clear {
+    clear: both;
+}
+
+#zoom1 {
+    right: 0;
+}
+#zoom2 {
+    left: 0;
+}
+.menu nav {}
+
+.menu {
+    width: 100%;
+    position: relative;
+}
+
+
+
+.menu select {
+    margin-top: 5px;
+}
+
+#menu li {
+    background-color: #fff;
+    display: block;
+    border: 1px solid #aaa;
+    z-index: 50;
+}
+
+#menu li:hover {
+    background-color: #666;
+}
+
+#menupar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    z-index: 50;
+    width: 100%;
+    margin: 0;
+    padding-left:5px;
+}
+
+#menuimpar {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    margin-right: 0px;
+    z-index: 50;
+}
+
+.busca {
+    height: 25px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 0px;
+    margin-top: 5px;
+}
+
+.buttons {
+margin-bottom: 5px;
+ position: fixed;
+ padding-left: 5px; 
+ z-index: 10;
+ background-color: #fff;
+ width: 195px; 
+ outline: 1px solid black; 
+}
+
+
+
+.buttons img {
+width: 24px;
+    height: 24px;
+}
+
+
+
+.menu .buttons {
+    margin-top: 5px;
+    z-index: 50;
+    position: relative;
+    top:-1px;
+    width: 120px;
+    display: inline;
+}
+.menu button {
+    padding: 0px;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 0px;
+    margin-top: 5px;
+    text-align: center;
+    position: relative;
+    top: 2px;
+    font-size: 15px;
+    
+}
+
+.buttons button:hover {
+    background-color: #666;
+    color: #fff;
+    border-color: black;
+}
+
+
+button span.glyphicon {
+    position: relative;
+    top: 0px;
+    
+}
+
+
+
+/*range http://danielstern.ca/range.css/#/*/
+
+input[type=range] {
+    -webkit-appearance: none;
+    display: inline;
+    width: 120px;
+    margin: 10px 0;
+
+}
+
+
+
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4.3px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+    background: #ffffff;
+    border-radius: 1.3px;
+    border: 1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 1.1px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 0px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6.35px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ffffff;
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 4.3px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+    background: #ffffff;
+    border-radius: 1.3px;
+    border: 1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 1.1px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 0px;
+    background: #ffffff;
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 4.3px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #fcfcfc;
+    border: 1px solid #000000;
+    border-radius: 2.6px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-fill-upper {
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 2.6px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 1.1px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 0px;
+    background: #ffffff;
+    cursor: pointer;
+    height: 4.3px;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #ffffff;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ffffff;
+}
+
+
+
+#slider {
+    width: 27px;
+    height: 100%;
+    background-color:transparent;
+    position: absolute;
+    left: 50%;
+    z-index: 600;
+    cursor: ew-resize;
+}
+
+#slider:hover {
+    border-left: 1px solid black;
+}
+
+
+
+#slider .control {
+    position: absolute;
+    margin-top: 0px;
+    margin-left: 0px;
+    line-height: 25px;
+    bottom: 0px;
+}
+
+/* slider */
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 5.5px 0;
+  z-index: 10;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #fff;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #ff0000;
+  height: 15px;
+  width: 10px;
+  background: #ff0000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #fff;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #000000;
+  border: 1px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  border: 1px solid #ff0000;
+  height: 15px;
+  width: 10px;
+  background: #ff0000;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #000000;
+  border: 1px solid #010101;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-fill-upper {
+  background: #000000;
+  border: 1px solid #010101;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-thumb {
+  border: 1px solid #ff0000;
+  height: 15px;
+  width: 10px;
+  border-radius: 0px;
+  background: #ff0000;
+  cursor: pointer;
+  height: 4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #000000;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #0d0d0d;
+}
+
+
+
+
+/* player */
+
+#audios {
+    background-color: #fff;
+    margin-top: 0px;
+    padding-left: 5px;
+    height: calc(100% - 50px);
+    overflow: scroll;
+    /*display: flex;
+    flex-direction: column-reverse;*/
+}
+
+
+
+.player {
+    width: 200px;
+    padding-top: 5px;
+    overflow: hidden;
+    float: left;
+    margin: 0;
+    position: relative;
+}
+
+.player .smalltext {
+    color: #fff;
+}
+
+.player .audiodata {
+    position: absolute;
+    top:20px;
+    color: #fff;
+    z-index: 10;
+    width: 180px;
+    height: 35px;
+    overflow: hidden;
+}
+
+#audios img {
+pointer-events: none;
+-webkit-user-drag: none;
+z-index: 1;
+}
+
+.volctr {
+    position: absolute;
+    z-index: 10;
+
+}
+
+.volctr span{
+    position: relative;
+    top: 2px;
+}
+
+.player .fa {
+    z-index: 10;
+}
+
+.loopbtn {
+    position: absolute;
+    top: 20px;
+    right: 4px;
+    color: #fff;
+}
+
+.removebtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #fff;
+    z-index: 30;
+}
+.disabled {
+    color: #f00;
+}
+
+
+/* about */
+
+#about {
+    display: block;
+    background: #fff;
+    position: absolute;
+    top: 10px;
+    right: -17px;
+    padding: 5px 10px;
+    transform: rotate(270deg);
+}
+
+#about .credits {
+    position: absolute;
+    display: none;
+    top: -110px;
+    right: -70px;
+    width: 200px;
+    padding: 10px;
+    background-color: #fff;
+    transform: rotate(90deg);
+}
+
+#about:hover .credits {
+    display: block;
+}
+
+
+/* cellphone version  */
+@media screen and (max-width: 600px) {
+
+    section {
+        width: 50%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    #playlist {
+        width: 50%;
+    }
+
+    audio {
+        width: 100%;
+    }
+
+    #list {
+        width: 50%;
+    }
+
+.result {
+    display: block;
+    width: calc(100% - 10px);
+    float: left;
+    margin: 5px;
+}
+
+    .smallimg {
+        width: 100%;
+    }
+
+    .info {
+        height: auto;
+    }
+}
+
+/* recorder */
+#recList a {
+    font-size: 10px;
+    color: #000;
+    
+}
+
+
+#sources {
+    font-size: 6pt;
+}
+
+
+
+
