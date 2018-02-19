@@ -291,6 +291,13 @@ return $sce.trustAsResourceUrl(recordingUrl);
 }]);
 
 
+app.filter('urlnode', function(){
+  return function(item) {
+    var str = item;
+ str.replace("http://freesound.org/apiv2/", "/freesound/");
+  };
+});
+
 function findinarray(arraytosearch, key, valuetosearch) {
 
     for (var i = 0; i < arraytosearch.length; i++) {

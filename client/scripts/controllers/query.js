@@ -47,6 +47,7 @@ $scope.singlequery = function(soundid) {
       $scope.$apply(function () {
         $scope.response = response;
         $scope.sound = response.results;
+        
       });
       }, function(response) {
         // error.
@@ -81,6 +82,17 @@ $scope.makequery = function(urlbase) {
       $scope.$apply(function () {
           $scope.response = response;
           $scope.results = response.results;
+          //change the next link
+          if (response.next){
+        $scope.next = response.next;
+        $scope.next = $scope.next.replace("http://freesound.org/apiv2/", "/freesound/");
+      //console.log($scope.next);
+        }
+        //change the previous link
+        if (response.previous){
+        $scope.previous = response.previous;
+        $scope.previous = $scope.previous.replace("http://freesound.org/apiv2/", "/freesound/");
+        }
       });
       }, function(response) {
         // error.

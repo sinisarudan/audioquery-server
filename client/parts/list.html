@@ -3,12 +3,12 @@
   <div class="menu" ng-hide="visible">
                     <input type="text" class="busca control" ng-model="query" placeholder="search"/>
                     <!--<button class="zoom-out fa fa-minus"></button>-->
-                    <a href="http://www.codigo.xyz/audioquery/" target="_blank" style="float:letf;inline"><button class="zoom-in fa fa-plus"></button></a>
+                    <a href="http://playsound.space" target="_blank" style="float:letf;inline"><button class="zoom-in fa fa-plus"></button></a>
                     <!--<button class="resetpar fa fa-arrows-alt"></button>-->
                     <!--<button class="fa fa-rotate-right" id="rotateIcon" data-ng-init="rd=1;" data-ng-click="RotateImage('img1'+ $index,rd);rd=rd+1;rd==4?rd=0:''"></button>-->
                     <!--<button class="prev-pag resetpar fa fa-arrow-up" ng-click="moveparprev()"></button>-->
-                    <button ng-hide="response.previous == null" class="next-pag resetpar resetimpar fa fa-arrow-left" ng-click="makequery(response.previous)"></button>
-                    <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(response.next)"></button>
+                    <button ng-hide="response.previous == null" class="next-pag resetpar resetimpar fa fa-arrow-left" ng-click="makequery(previous)"></button>
+                    <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(next)"></button>
                     <button ng-hide="recording" class="next-pag fa fa-circle" ng-click="startRecording(); recording = true" style="color:#f00"></button>
                     <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
 
@@ -39,6 +39,7 @@
 
 
 <section id="list" >
+  
 
               <a ng-hide=""> </a>
               <div id="results">
