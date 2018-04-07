@@ -125,13 +125,24 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           var sound      = document.createElement('audio');
           var imgid = '#img' + audiodata.playerid;
           var divid = 'audio' + audiodata.playerid;
+          $scope.windowid = 'imgwindow' + audiodata.playerid;
+          $scope.containerid = '#windowcont' + audiodata.playerid;
           
+          var resizableConfig = {containment: $scope.containerid};
+          var draggableConfig = {containment: $scope.containerid};
+
+          jQuery($scope.windowid).resizable(resizableConfig);  
+          jQuery($scope.windowid).draggable(resizableConfig);  
+          jQuery($scope.windowid).css('cursor:pointer'); 
+
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
           sound.controls = 'controls';
           //sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
+
+
           
 
           //put element on playlist
@@ -214,15 +225,35 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
   }
 }]);
 
-app.directive('isDraggable', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, elm, attrs) {
-      var options = scope.$eval(attrs.isDraggable); //allow options to be passed in
-      elm.draggable(options);
-    }
-  };
+
+app.directive('resizable', function(){
+
+    var resizableConfig = {containment: ".imgcontainer"};
+    var draggableConfig = {containment: ".imgcontainer"};
+
+    //console.log(jQuery.ui);
+
+
+    return {
+        restrict: 'A',
+        scope: {
+            callback: '&onResize'
+        },
+        link: function postLink(scope, elem) {
+            elem.resizable(resizableConfig);
+            elem.draggable(draggableConfig);
+            elem.on('resizestop', function () {
+                if (scope.callback) scope.callback();
+            });
+        }
+    };
+
+
 });
+
+
+
+
 
 app.directive('audiosource', function(){
 });

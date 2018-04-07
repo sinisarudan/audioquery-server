@@ -14,8 +14,14 @@
 	
 <a class="playbtn fa fa-play" ng-class="" ng-click="playsound()"></a>
 
-
+<div class="imgcontainer" id="{{containerid}}">
+	<div class="imgwindow" id="{{windowid}}">
+		<div class="imgpointer"></div>
+	</div>
 <img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false; "/>
+</div>
+
+
 
 <span class="smalltext audiodata">{{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
 
