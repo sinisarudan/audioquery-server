@@ -130,10 +130,27 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           var response ;
           var imgid = '#img' + audiodata.playerid;
           var divid = 'audio' + audiodata.playerid;
+
           // var requests = [];
           // var myBuffer;
           // var msource;
+
+
+          $scope.windowid = 'imgwindow' + audiodata.playerid;
+          $scope.containerid = '#windowcont' + audiodata.playerid;
+
+          var myBuffer;
+          var msource;
+
+
           
+          var resizableConfig = {containment: $scope.containerid};
+          var draggableConfig = {containment: $scope.containerid};
+
+          jQuery($scope.windowid).resizable(resizableConfig);  
+          jQuery($scope.windowid).draggable(resizableConfig);  
+          jQuery($scope.windowid).css('cursor:pointer'); 
+
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
           sound.preload = 'preload';
@@ -143,7 +160,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           sound.type     = 'audio/mpeg';
 
           
-
           //do the request for the sound
           var request = new XMLHttpRequest();
           request.open("GET", itemsrc, true);
@@ -300,15 +316,34 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
   }
 }]);
 
-// app.directive('isDraggable', function() {
-//   return {
-//     restrict: 'A',
-//     link: function(scope, elm, attrs) {
-//       var options = scope.$eval(attrs.isDraggable); //allow options to be passed in /* DevSkim: reviewed DS189424 on 2018-04-07 */
-//       elm.draggable(options);
-//     }
-//   };
-// });
+
+
+app.directive('resizable', function(){
+
+    var resizableConfig = {containment: ".imgcontainer"};
+    var draggableConfig = {containment: ".imgcontainer"};
+
+    //console.log(jQuery.ui);
+
+
+    return {
+        restrict: 'A',
+        scope: {
+            callback: '&onResize'
+        },
+        link: function postLink(scope, elem) {
+            elem.resizable(resizableConfig);
+            elem.draggable(draggableConfig);
+            elem.on('resizestop', function () {
+                if (scope.callback) scope.callback();
+            });
+        }
+    };
+
+
+});
+
+
 
 app.directive('audiosource', function(){
 });

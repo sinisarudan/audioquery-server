@@ -89,6 +89,18 @@ section {
     height: 50px;
 }
 
+.imgcontainer{
+    height: 50px;
+    width: 100%; 
+}
+
+.imgwindow {
+    border: 1px solid red;
+    height: 30px;
+    width: 90px;
+    background-color: red;
+}
+
 .smallimg.true {
     width: 100px;
 }
