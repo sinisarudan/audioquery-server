@@ -1,9 +1,13 @@
 <div class="player" id="sound{{''+audiodata.playerid}}" ng-switch on="audiodata.newsound">
 
 <!--<input class="loopbtn" type="checkbox" ng-model="loop">-->
-<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop.booleanVal}" ng-click="loop.booleanVal = !loop.booleanVal"></a>
 
 <a class="removebtn fa fa-times" ng-class="" ng-click="removethis()"></a>
+<a class="playbtn fa fa-play" ng-class="" ng-click="playsound()"></a>
+<a class="playbtn fa fa-stop" ng-class="" ng-click="stopsound()"></a>
+<a class="playbtn fa fa-pause" ng-class="" ng-click="pausesound()"></a>
+<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop.booleanVal}" ng-click="loop.booleanVal = !loop.booleanVal"></a>
+
 
 <p class="smalltext volctr">
 	<span>vol: {{soundvolume | number: 2}} </span><input type="range" min="0" value="1" max="1" step="any" id="slider-{{freesound.id}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input>  </p>
@@ -11,8 +15,8 @@
 <p class="smalltext speedctr">
 	<span>speed: {{soundspeed| number: 2}} </span><input type="range" min="0.1" value="1" max="4" step="any" id="slider-{{freesound.id}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input>  </p>
 
-	
-<a class="playbtn fa fa-play" ng-class="" ng-click="playsound()"></a>
+
+
 
 <div class="imgcontainer" id="{{containerid}}">
 	<div class="imgwindow" id="{{windowid}}">

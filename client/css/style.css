@@ -90,11 +90,14 @@ section {
 }
 
 .imgcontainer{
+
+
     height: 50px;
     width: 100%; 
 }
 
 .imgwindow {
+    display: none;
     border: 1px solid red;
     height: 30px;
     width: 90px;
@@ -565,24 +568,18 @@ z-index: 1;
 }
 
 .loopbtn {
-    position: absolute;
-    top: 20px;
-    right: 4px;
+    position: relative;
     color: #fff;
 }
 
 .removebtn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+    position: relative;
     color: #fff;
     z-index: 30;
 }
 
 .playbtn {
     position: relative;
-    top: 5px;
-    right: 5px;
     color: #fff;
     z-index: 30;
 }
