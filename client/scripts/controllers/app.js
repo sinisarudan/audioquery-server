@@ -107,6 +107,9 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           });
 
+          
+
+
           $scope.loop = false;
           $scope.soundvolume = 1;
           $scope.soundspeed = 1;
@@ -125,8 +128,13 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           var sound      = document.createElement('audio');
           var imgid = '#img' + audiodata.playerid;
           var divid = 'audio' + audiodata.playerid;
+
           $scope.windowid = 'imgwindow' + audiodata.playerid;
           $scope.containerid = '#windowcont' + audiodata.playerid;
+
+          var myBuffer;
+          var msource;
+
           
           var resizableConfig = {containment: $scope.containerid};
           var draggableConfig = {containment: $scope.containerid};
@@ -137,12 +145,56 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
-          sound.controls = 'controls';
+          sound.preload = 'preload';
+          // sound.controls = 'controls';
           //sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
 
+          
+          //do the request for the sound
+          var request = new XMLHttpRequest();
+          request.open("GET", itemsrc, true);
+          request.responseType = "arraybuffer";
 
+          request.onload = function() {
+          audioCtx.decodeAudioData(request.response, function(buffer) {
+                  if (!buffer) {
+                      alert('error decoding file data: ' + itemsrc);
+                      return;
+                  }
+                  // loader.bufferList[index] = buffer;
+                  // if (++loader.loadCount == loader.urlList.length)
+                  //     loader.onload(loader.bufferList);
+                  // console.log(buffer);
+                  // msource.buffer = buffer;
+                  // console.log(buffer.length);
+
+                  myBuffer = buffer;
+                  msource = audioCtx.createBufferSource();
+                  // myBuffer.start(0);
+                  // myBuffer.loop;
+                  msource.buffer = myBuffer;
+                  msource.connect(gainNode);
+                  msource.loop = true;
+
+
+                  // msource.buffer = myBuffer;
+                  // msource.connect(gainNode);
+
+
+              }    
+            );
+          }
+
+          // console.log(myBuffer);
+
+          request.onerror = function() {
+              alert('BufferLoader: XHR error');        
+          }
+
+          request.send();
+          // console.log(myBuffer);
           
 
           //put element on playlist
@@ -207,13 +259,32 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         $scope.playsound = function() {
           //$scope.$parent.sounds.splice(index, 1);
-          sound.play(2000);
+          // sound.play();
+          msource.start(0);
+          // itemsrc.start(0);
         }
 
+
+        // console.log(msource.buffer);
+        //           // msource.buffer = buffer;
+        // console.log(msource.buffer.length);
+
         //console.log($scope.loop);
-        var msource = audioCtx.createMediaElementSource(sound);
-        msource.connect(gainNode);
+
+        
+///
+        // console.log(itemsrc);
+
+      // var mySource = audioCtx.createBufferSource();
+    // myBuffer.start(0);
+    // myBuffer.loop;
+      // mySource.connect(gainNode);
+
+        // var msource = audioCtx.createMediaElementSource(sound);
+        
+        // msource.connect(gainNode);
         sources.push(msource);
+        
 
       }, function(response) {
         // error.
@@ -224,6 +295,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
   }
 }]);
+
 
 
 app.directive('resizable', function(){
@@ -250,8 +322,6 @@ app.directive('resizable', function(){
 
 
 });
-
-
 
 
 
