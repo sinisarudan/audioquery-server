@@ -109,7 +109,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           $scope.loop = false;
           $scope.soundvolume = 1;
-          $scope.soundspeed = 1;
           var itemid = $scope.freesound.id;
           var itemsrc = $scope.freesound.previews['preview-hq-mp3'];
           //create audio element
@@ -132,7 +131,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           //sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
-          
 
           //put element on playlist
           document.getElementById(divid).appendChild(sound);
@@ -175,16 +173,9 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
         }, true);
 
         $scope.setvolume = function(val){
-          // console.log($scope.soundvolume);
+          //console.log($scope.soundvolume);
           sound.volume = val;
           borderval = val + 'px';
-
-        }
-
-        $scope.setspeed = function(val){
-          // console.log($scope.soundspeed);
-          sound.playbackRate = 1/val;
-          // borderval = val + 'px';
 
         }
 
@@ -209,15 +200,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
   }
 }]);
 
-app.directive('isDraggable', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, elm, attrs) {
-      var options = scope.$eval(attrs.isDraggable); //allow options to be passed in
-      elm.draggable(options);
-    }
-  };
-});
+
 
 app.directive('audiosource', function(){
 });
