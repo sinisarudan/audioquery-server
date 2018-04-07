@@ -507,6 +507,7 @@ input[type=range]:focus::-ms-fill-upper {
     float: left;
     margin: 0;
     position: relative;
+    background-color: #000;
 }
 
 .player .smalltext {
@@ -514,8 +515,8 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .player .audiodata {
-    position: absolute;
-    top:20px;
+    position: relative;
+    top:0px;
     color: #fff;
     z-index: 10;
     width: 180px;
@@ -530,7 +531,7 @@ z-index: 1;
 }
 
 .volctr {
-    position: absolute;
+    position: relative;
     z-index: 10;
 
 }
@@ -538,6 +539,12 @@ z-index: 1;
 .volctr span{
     position: relative;
     top: 2px;
+}
+
+.speedctr {
+    position: relative;
+    top: 20px;
+    z-index: 10;
 }
 
 .player .fa {
