@@ -18,6 +18,8 @@ const stringFromQuery = (queryObj) => {
   return queryStr ? '?' + queryStr : '';
 };
 
+
+
 router.all('/ciccio',() => console.log('cicciobusNew!'));
 
 router.all(freesoundInternalPrefix, (req, resp, next) => {
@@ -45,4 +47,12 @@ router.all(freesoundInternalPrefix, (req, resp, next) => {
   req.on('end', function () { req2.end(); });
 });
 
+
+router.get('/*', (req, resp, next) => {
+  var dirfiles = ".." +"/client/index.html";
+
+  resp.sendfile( path.join(__dirname, dirfiles)); // updated to reflect dir structure
+});
+
 module.exports = router;
+

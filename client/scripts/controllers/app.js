@@ -3,6 +3,7 @@ var app = angular.module('app', [
     'ngTouch',
     'ngSanitize'
 
+
 ]).config(function($sceProvider){
     $sceProvider.enabled(false);
     //para permitir links externos
@@ -44,14 +45,13 @@ app.run(['$route', '$location', '$rootScope', function ($route, $location, $root
 
 app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
     $routeProvider
       .
-    when('/busca', {
-            templateUrl: 'parts/busca.html',
+    when('/chat', {
+            templateUrl: 'parts/chat.html',
             controller: 'queryController'
         }).otherwise({
-
         templateUrl: 'parts/list.html',
             controller: 'queryController'
     });
@@ -121,25 +121,16 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           if (license == "http://creativecommons.org/licenses/by/3.0/") {
                       document.getElementById('sources').appendChild(credits);
           }
-
-
-
           var sound      = document.createElement('audio');
           var imgid = '#img' + audiodata.playerid;
           var divid = 'audio' + audiodata.playerid;
           
-
-
-
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
           sound.controls = 'controls';
           //sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
-          
-
-
 
           //put element on playlist
           document.getElementById(divid).appendChild(sound);
@@ -188,7 +179,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         }
 
-
         $scope.removethis = function() {
           //$scope.$parent.sounds.splice(index, 1);
           $scope.$parent.removeitem(audiodata.playerid);
@@ -196,26 +186,23 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
         }
 
         //console.log($scope.loop);
-
         var msource = audioCtx.createMediaElementSource(sound);
         msource.connect(gainNode);
         sources.push(msource);
 
       }, function(response) {
         // error.
-
         //ok
       });
-
-
 
     },
 
   }
 }]);
 
-app.directive('audiosource', function(){
 
+
+app.directive('audiosource', function(){
 });
 
 

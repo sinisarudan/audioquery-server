@@ -19,6 +19,7 @@ $scope.about= 'estreito';
 
 $scope.$watch('query', function() {
   $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
+  $scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
 });
 
@@ -104,6 +105,49 @@ $scope.makequery = function(urlbase) {
       });
 
 }
+
+$scope.gifquery = function(urlgif){
+var req = {
+   method: 'GET',
+   url: urlgif,
+   headers: {
+     'Content-Type': 'application/json'
+   }
+
+  };
+
+  $.ajax(req).
+      then(function(response) {
+        // when the response is available
+        console.log(response);
+
+      $scope.$apply(function () {
+          $scope.gifresponse = response;
+          //$scope.gifresults = response.results;
+          //change the next link
+          if (response.next){
+        $scope.next = response.next;
+        $scope.next = $scope.next.replace("http://freesound.org/apiv2/", "/freesound/");
+      //console.log($scope.next);
+        }
+        //change the previous link
+        if (response.previous){
+        $scope.previous = response.previous;
+        $scope.previous = $scope.previous.replace("http://freesound.org/apiv2/", "/freesound/");
+        }
+      });
+      }, function(response) {
+        // error.
+
+        //ok
+      }, function(response) {
+        // error.
+
+      });
+
+
+}
+
 
 //verifying url for pre-selected samples
 

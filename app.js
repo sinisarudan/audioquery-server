@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var index = require('./routes/index');
 
 var freesoundApiRouter = require('./routes/freesound');
 var users = require('./routes/users');
@@ -25,14 +26,15 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/freesound', freesoundApiRouter);
 app.use('/users', users);
+app.use('/', index);
 
 app.get('/fs', () => console.log('fs'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+var err = new Error('Not Found');
+err.status = 404;
+next(err);
 });
 
 // error handlers
@@ -48,6 +50,8 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
+
 
 // production error handler
 // no stacktraces leaked to user

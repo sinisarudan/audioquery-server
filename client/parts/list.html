@@ -1,19 +1,13 @@
 <section id="playlist">
 
-  <div class="menu" ng-hide="visible">
+<div class="menu" ng-hide="visible">
                     <input type="text" class="busca control" ng-model="query" placeholder="search"/>
                     <!--<button class="zoom-out fa fa-minus"></button>-->
                     <a href="http://playsound.space" target="_blank" style="float:letf;inline"><button class="zoom-in fa fa-plus"></button></a>
-                    <!--<button class="resetpar fa fa-arrows-alt"></button>-->
-                    <!--<button class="fa fa-rotate-right" id="rotateIcon" data-ng-init="rd=1;" data-ng-click="RotateImage('img1'+ $index,rd);rd=rd+1;rd==4?rd=0:''"></button>-->
-                    <!--<button class="prev-pag resetpar fa fa-arrow-up" ng-click="moveparprev()"></button>-->
                     <button ng-hide="response.previous == null" class="next-pag resetpar resetimpar fa fa-arrow-left" ng-click="makequery(previous)"></button>
                     <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(next)"></button>
                     <button ng-hide="recording" class="next-pag fa fa-circle" ng-click="startRecording(); recording = true" style="color:#f00"></button>
                     <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
-
-                    <!--<button class="prev-pag resetpar fa fa-arrow-down" ng-click="moveparnext()"></button>-->
-
                 </div><br>
 
 
@@ -25,8 +19,6 @@
                <!--<button ng-click="sound.splice($index,1)">X</button>  -->
             </div>
   </div>
-
-
 
 
   <div id="recList">
@@ -46,12 +38,14 @@
               <div>
 
 
-              <div ng-repeat="item in results | array | orderBy:'duration'" class="result" id="{{'#' + item.id}}" ng-click="player({{item.id}}); logger({{item.id}})" analytics-on analytics-event="Click" analytics-category="Sounds" analytics-label="item">
+              <div ng-repeat="item in results | array | orderBy:'duration'" class="result" id="{{'#' + item.id}}" ng-click="player({{item.id}}); logger({{item.id}})" analytics-on analytics-event="Click" analytics-category="Sounds" analytics-label="item" >
 
-                    <img class="smallimg" ng-src="{{item.images['spectral_m']}}"/><br/>
-                    <span class="info">{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> <br/>
+                    <img class="smallimg {{item.duration < 1 ? 'true' : 'false'}}" ng-src="{{item.images['spectral_m']}}" /><br/>
+                    <span class="info" >{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> <br/>
 
               </div>
+
+              
 
 </div>
 

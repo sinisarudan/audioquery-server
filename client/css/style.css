@@ -88,6 +88,10 @@ section {
     height: 50px;
 }
 
+.smallimg.true {
+    width: 100px;
+}
+
 .miniimg {
     width: 200px;
     height: 25px;
