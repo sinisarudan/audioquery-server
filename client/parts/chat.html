@@ -1,0 +1,93 @@
+<section id="playlist">
+
+<div class="menu" ng-hide="visible">
+                    <input type="text" class="busca control" ng-model="query" placeholder="search"/>
+                    <!--<button class="zoom-out fa fa-minus"></button>-->
+                    <a href="http://playsound.space" target="_blank" style="float:letf;inline"><button class="zoom-in fa fa-plus"></button></a>
+                    <!--<button class="resetpar fa fa-arrows-alt"></button>-->
+                    <!--<button class="fa fa-rotate-right" id="rotateIcon" data-ng-init="rd=1;" data-ng-click="RotateImage('img1'+ $index,rd);rd=rd+1;rd==4?rd=0:''"></button>-->
+                    <!--<button class="prev-pag resetpar fa fa-arrow-up" ng-click="moveparprev()"></button>-->
+                    <button ng-hide="response.previous == null" class="next-pag resetpar resetimpar fa fa-arrow-left" ng-click="makequery(previous)"></button>
+                    <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(next)"></button>
+                    <button ng-hide="recording" class="next-pag fa fa-circle" ng-click="startRecording(); recording = true" style="color:#f00"></button>
+                    <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
+
+                    <!--<button class="prev-pag resetpar fa fa-arrow-down" ng-click="moveparnext()"></button>-->
+
+                </div><br>
+
+
+  <div id="audios">
+
+    <h1>CHAT</h1>
+
+           <div ng-repeat="sound in sounds track by sound.playerid" class="players">
+               <ass-player audiodata="sound"></ass-player>
+               <!--<button ng-click="sound.splice($index,1)">X</button>  -->
+            </div>
+  </div>
+
+
+
+
+  <div id="recList">
+    <h5 ng-show="recordings">Recordings</h5>
+    <ul id="recordingslist"></ul>
+  </div>
+ <h1>CHAT</h1>
+
+</section>
+
+
+<section id="list" >
+  
+
+              <a ng-hide=""> </a>
+              <div id="results">
+              <div>
+
+
+              <div ng-repeat="item in results | array | orderBy:'duration'" class="result" id="{{'#' + item.id}}" ng-click="player({{item.id}}); logger({{item.id}})" analytics-on analytics-event="Click" analytics-category="Sounds" analytics-label="item" style="width:{{item.duration}}{{item.duration < 10 ? itemduration * 10 : ''}}px">
+
+                    <img class="smallimg {{item.duration < 1 ? 'true' : 'false'}}" ng-src="{{item.images['spectral_m']}}" style="width:{{item.duration}}{{item.duration < 10 ? itemduration * 10 : ''}}px"/><br/>
+                    <span class="info" >{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> <br/>
+
+              </div>
+
+</div>
+
+              <div class="clear"></div>
+
+              <div id="preloaded">
+
+
+
+
+     <!--<iframe ng-if="sounds" ng-repeat="x in sounds track by $index" frameborder="0" scrolling="no" src="{{'https://www.freesound.org/embed/sound/iframe/' + x + '/simple/medium_no_info/' }}" width="200" height="80"></iframe>-->
+
+    </div>
+
+
+
+
+
+
+  </div>
+
+
+<div id="about">
+   <div class="vertical apoio" >about</div>
+   <div class="credits">
+   <p >experimental client for the <a href="http://freesound.org/docs/api/" target="_blank">freesound API</a> <!--<br/> by <a href="http://ariane.stolfi.org" target="_blank">Ariane Stolfi,</a> 2017--></p>
+  <p >To use it, just type the desired search <br/> on the search field. To save your collection <br/>of sounds, just bookmark the url.</p>
+</div>
+    </div>
+
+<div id="sources">
+  <p>This application uses several sounds from freesound.org</p>
+  <p>The sounds below are licensed with "Attribution" Creative Commons license and should be credited:</p>
+
+</div>
+
+
+</section>
