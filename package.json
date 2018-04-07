@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/arianestolfi/audioquery-server#readme",
   "dependencies": {
+    "audio-loader": "^1.0.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "http": "0.0.0",
