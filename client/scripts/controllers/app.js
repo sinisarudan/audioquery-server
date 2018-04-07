@@ -126,16 +126,19 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                       document.getElementById('sources').appendChild(credits);
           }
           var sound      = document.createElement('audio');
+          var source   = audioCtx.createBufferSource();
+          var response ;
           var imgid = '#img' + audiodata.playerid;
           var divid = 'audio' + audiodata.playerid;
-          var myBuffer;
-          var msource;
+          // var requests = [];
+          // var myBuffer;
+          // var msource;
           
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
           sound.preload = 'preload';
-          // sound.controls = 'controls';
-          //sound.loop = 'loop';
+          sound.controls = 'controls';
+          sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
 
@@ -159,13 +162,18 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                   // msource.buffer = buffer;
                   // console.log(buffer.length);
 
-                  myBuffer = buffer;
-                  msource = audioCtx.createBufferSource();
+                  // myBuffer = buffer;
+                  // msource = audioCtx.createBufferSource();
                   // myBuffer.start(0);
                   // myBuffer.loop;
-                  msource.buffer = myBuffer;
-                  msource.connect(gainNode);
-                  msource.loop = true;
+
+                  response = request.response;
+                  console.log(response);
+
+                  source.buffer = buffer;
+                  console.log(source.buffer);
+                  source.connect(gainNode);
+                  
 
 
                   // msource.buffer = myBuffer;
@@ -186,8 +194,9 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           // console.log(myBuffer);
           
 
-          //put element on playlist
+          // put element on playlist
           document.getElementById(divid).appendChild(sound);
+
           if (audiodata.newsound === 1) {
             sound.autoplay = 'autoplay';
           }
@@ -228,14 +237,18 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         $scope.setvolume = function(val){
           // console.log($scope.soundvolume);
+          // source.volume = val;
           sound.volume = val;
+          // msource.volume = val;
           borderval = val + 'px';
 
         }
 
         $scope.setspeed = function(val){
           // console.log($scope.soundspeed);
+          // source.playbackRate = 1/val;
           sound.playbackRate = 1/val;
+          // msource.playbackRate = 1/val;
           // borderval = val + 'px';
 
         }
@@ -248,8 +261,9 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         $scope.playsound = function() {
           //$scope.$parent.sounds.splice(index, 1);
-          // sound.play();
-          msource.start(0);
+          sound.play();
+          // sound.start();
+          // source.start(0);
           // itemsrc.start(0);
         }
 
@@ -269,10 +283,11 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
     // myBuffer.loop;
       // mySource.connect(gainNode);
 
-        // var msource = audioCtx.createMediaElementSource(sound);
+        var msource = audioCtx.createMediaElementSource(sound);
         
-        // msource.connect(gainNode);
+        msource.connect(gainNode);
         sources.push(msource);
+        sources.push(source);
         
 
       }, function(response) {
