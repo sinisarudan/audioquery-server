@@ -95,7 +95,7 @@ section {
 }
 
 .imgwindow {
-    border: 1px solid red;
+    border: 1px solid white;
     height: 30px;
     width: 90px;
     background-color: red;
@@ -545,6 +545,7 @@ z-index: 1;
 
 .volctr {
     position: relative;
+    width: 70px;
     z-index: 10;
 
 }
@@ -556,9 +557,17 @@ z-index: 1;
 
 .speedctr {
     position: relative;
-   
+    width: 70px;  
     z-index: 10;
 }
+
+.seekctr {
+    position: relative;
+    width: 70px;
+    z-index: 10;
+}
+
+
 
 .player .fa {
     z-index: 10;
@@ -576,15 +585,15 @@ z-index: 1;
     top: 5px;
     right: 5px;
     color: #fff;
-    z-index: 30;
+    z-index: 40;
 }
 
 .playbtn {
-    position: relative;
-    top: 5px;
+    position: absolute;
+    top: 35px;
     right: 5px;
     color: #fff;
-    z-index: 30;
+    z-index: 40;
 }
 
 .disabled {
