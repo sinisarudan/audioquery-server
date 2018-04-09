@@ -107,8 +107,10 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           });
 
-          $scope.loop = false;
-          $scope.soundvolume = 1;
+          
+
+
+          
           var itemid = $scope.freesound.id;
           var itemsrc = $scope.freesound.previews['preview-hq-mp3'];
           //create audio element
@@ -122,18 +124,122 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                       document.getElementById('sources').appendChild(credits);
           }
           var sound      = document.createElement('audio');
+          var source   = audioCtx.createBufferSource();
+          var response ;
           var imgid = '#img' + audiodata.playerid;
           var divid = 'audio' + audiodata.playerid;
-          
+          // var requests = [];
+          // var myBuffer;
+          // var msource;
+
+
+
+
+          $scope.loop = false;
+          $scope.soundvolume = 1;
+          $scope.soundspeed = 1;
+          $scope.isPlaying = false;
+          $scope.seekpos = sound.currentTime;
+          $scope.durationMax = sound.duration;
+
+
+          var myBuffer;
+          var msource;
+
+          $scope.windowid = 'imgwindow' + audiodata.playerid;
+          $scope.containerid = '#windowcont' + audiodata.playerid;
+
+
+          console.log($scope.windowid);
+
+          // var resizableConfig = {containment: $scope.containerid};
+          // var draggableConfig = {containment: $scope.containerid};
+
+          // jQuery($scope.windowid).resizable(resizableConfig);  
+          // jQuery($scope.windowid).draggable(resizableConfig);  
+          // jQuery($scope.windowid).css('cursor:pointer'); 
+
+          // jQuery($scope.windowid).draggable();  
+
+          // $scope.moveme = $( function() {
+          // $( $scope.windowid ).draggable();
+          // } );
+
+          //this works
+
+          // jQuery( "#navigator" ).draggable();
+
+          //this doesn't
+          // jQuery( $scope.windowid ).draggable();
+
+          //this strangely works but I guess it's like having the same id
+          jQuery( imgwindow2 ).draggable();
+       
+
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
-          sound.controls = 'controls';
-          //sound.loop = 'loop';
+          sound.preload = 'preload';
+          // sound.controls = 'controls';
+          // sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
+          sound.isPlaying = true;
+          sound.currentTime.isChanged = false;
 
-          //put element on playlist
+          ////////////////////////////////////////////////
+          //do the request for the sound
+          var request = new XMLHttpRequest();
+          request.open("GET", itemsrc, true);
+          request.responseType = "arraybuffer";
+
+          request.onload = function() {
+          audioCtx.decodeAudioData(request.response, function(buffer) {
+                  if (!buffer) {
+                      alert('error decoding file data: ' + itemsrc);
+                      return;
+                  }
+                  // loader.bufferList[index] = buffer;
+                  // if (++loader.loadCount == loader.urlList.length)
+                  //     loader.onload(loader.bufferList);
+                  // console.log(buffer);
+                  // msource.buffer = buffer;
+                  // console.log(buffer.length);
+
+                  // myBuffer = buffer;
+                  // msource = audioCtx.createBufferSource();
+                  // myBuffer.start(0);
+                  // myBuffer.loop;
+
+                  response = request.response;
+                  // console.log(response);
+
+                  source.buffer = buffer;
+                  // console.log(source.buffer);
+                  source.connect(gainNode);
+                  
+
+
+                  // msource.buffer = myBuffer;
+                  // msource.connect(gainNode);
+
+
+              }    
+            );
+          }
+
+          // console.log(myBuffer);
+
+          request.onerror = function() {
+              alert('BufferLoader: XHR error');        
+          }
+
+          request.send();
+          // console.log(myBuffer);
+          //////////////////////////////////
+
+          // put element on playlist
           document.getElementById(divid).appendChild(sound);
+
           if (audiodata.newsound === 1) {
             sound.autoplay = 'autoplay';
           }
@@ -172,40 +278,46 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           }, false);
         }, true);
 
+
+
         $scope.setvolume = function(val){
-          //console.log($scope.soundvolume);
+          // console.log($scope.soundvolume);
+          // source.volume = val;
+
           sound.volume = val;
+          // console.log(sound.volume);
+          // msource.volume = val;
           borderval = val + 'px';
 
         }
 
-       $scope.playsound = function(val){
-          // console.log($scope.soundspeed);
-          sound.play();
-          // borderval = val + 'px';
-
-        }
-
-        $scope.pausesound = function(val){
-          // console.log($scope.soundspeed);
-          sound.pause();
-          // borderval = val + 'px';
-
-        }
-        $scope.stopsound = function(val){
-          // console.log($scope.soundspeed);
-          sound.stop();
-          cosole.log('stop');
-          // borderval = val + 'px';
-
-        }        
         $scope.setspeed = function(val){
           // console.log($scope.soundspeed);
+          // source.playbackRate = 1/val;
           sound.playbackRate = 1/val;
+          // msource.playbackRate = 1/val;
           // borderval = val + 'px';
 
         }
+
         
+
+        $scope.setseek = function(val){
+
+          sound.currentTime.isChanged = true;
+          sound.currentTime=val;
+          // console.log(sound.currentTime);
+          // console.log("slider says" + val);
+          // console.log("duration is" + sound.duration);
+          sound.currentTime.isChanged = false;
+
+          // console.log($scope.soundspeed);
+          // source.playbackRate = 1/val;
+          // sound.currentTime = 2;
+          // msource.playbackRate = 1/val;
+          // borderval = val + 'px';
+
+        }
 
         $scope.removethis = function() {
           //$scope.$parent.sounds.splice(index, 1);
@@ -213,10 +325,57 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           $scope.$parent.logger2('removed: ' + $scope.freesound.name);
         }
 
+        $scope.playsound = function() {
+
+          this.isPlaying=!this.isPlaying;
+
+          if (!this.isPlaying){
+
+            sound.play();
+            console.log(sound.currentTime);
+          }
+            
+          else{
+            sound.pause();
+            console.log("paused");
+          }
+          
+
+          //$scope.$parent.sounds.splice(index, 1);
+          
+
+          
+
+          //else
+
+          // sound.pause();
+          // sound.start();
+          // source.start(0);
+          // itemsrc.start(0);
+        }
+
+
+        // console.log(msource.buffer);
+        //           // msource.buffer = buffer;
+        // console.log(msource.buffer.length);
+
         //console.log($scope.loop);
+
+        
+///
+        // console.log(itemsrc);
+
+      // var mySource = audioCtx.createBufferSource();
+    // myBuffer.start(0);
+    // myBuffer.loop;
+      // mySource.connect(gainNode);
+
         var msource = audioCtx.createMediaElementSource(sound);
+        
         msource.connect(gainNode);
         sources.push(msource);
+        sources.push(source);
+        
 
       }, function(response) {
         // error.
@@ -228,6 +387,32 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
   }
 }]);
 
+
+
+app.directive('resizable', function(){
+
+    var resizableConfig = {containment: ".imgcontainer"};
+    var draggableConfig = {containment: ".imgcontainer"};
+
+    //console.log(jQuery.ui);
+
+
+    return {
+        restrict: 'A',
+        scope: {
+            callback: '&onResize'
+        },
+        link: function postLink(scope, elem) {
+            elem.resizable(resizableConfig);
+            elem.draggable(draggableConfig);
+            elem.on('resizestop', function () {
+                if (scope.callback) scope.callback();
+            });
+        }
+    };
+
+
+});
 
 
 app.directive('audiosource', function(){

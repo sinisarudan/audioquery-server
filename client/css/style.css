@@ -84,14 +84,32 @@ section {
 }
 
 .smallimg {
+    border: 1px solid blue;
     position: relative;
     width: 200px;
     height: 50px;
 }
 
+.draggable { 
+/*    border: 1px solid white;
+    width: 150px; 
+    height: 150px; 
+    padding: 0.5em;
+    color : white;*/
+
+    border: 1px solid white;
+    height: 10px;
+    /*width: 90px;*/
+    width: 10%;
+    padding: 0.5em;
+    background-color: red;
+    z-index: 1000;
+
+
+     }
+
 .imgcontainer{
-
-
+    border: 1px solid yellow;
     height: 50px;
     width: 100%; 
 }
@@ -101,7 +119,18 @@ section {
     border: 1px solid red;
     height: 30px;
     width: 90px;
+}
+/*.imgwindow {
+    border: 1px solid white;
+    height: 10px;
+    width: 10%;
+>>>>>>> 49e8e35adc058dc68d30dd0afe3d058a58a7f437
     background-color: red;
+}*/
+
+.imgpointer{
+    color:white;
+    z-index: 1000;
 }
 
 .smallimg.true {
@@ -109,6 +138,7 @@ section {
 }
 
 .miniimg {
+    border: 1px solid green;
     width: 200px;
     height: 25px;
 }
@@ -548,6 +578,7 @@ z-index: 1;
 
 .volctr {
     position: relative;
+    width: 70px;
     z-index: 10;
 
 }
@@ -559,9 +590,19 @@ z-index: 1;
 
 .speedctr {
     position: relative;
-   
+    width: 70px;  
     z-index: 10;
 }
+
+
+.seekctr {
+    position: relative;
+    width: 70px;
+    z-index: 10;
+}
+
+
+
 
 .player .fa {
     z-index: 10;
@@ -575,13 +616,13 @@ z-index: 1;
 .removebtn {
     position: relative;
     color: #fff;
-    z-index: 30;
+    z-index: 40;
 }
 
 .playbtn {
     position: relative;
     color: #fff;
-    z-index: 30;
+    z-index: 40;
 }
 
 .disabled {
