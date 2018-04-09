@@ -159,21 +159,8 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           // jQuery($scope.windowid).draggable(resizableConfig);  
           // jQuery($scope.windowid).css('cursor:pointer'); 
 
-          // jQuery($scope.windowid).draggable();  
-
-          // $scope.moveme = $( function() {
-          // $( $scope.windowid ).draggable();
-          // } );
-
-          //this works
-
-          // jQuery( "#navigator" ).draggable();
-
-          //this doesn't
-          // jQuery( $scope.windowid ).draggable();
-
-          //this strangely works but I guess it's like having the same id
-          jQuery( imgwindow2 ).draggable();
+          //this works 
+          jQuery($scope.windowid).draggable();
        
 
           sound.crossOrigin = "anonymous";
@@ -417,6 +404,15 @@ app.directive('resizable', function(){
 
 
 app.directive('audiosource', function(){
+});
+
+app.directive('dragMe', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, elem, attr, ctrl) {
+      elem.draggable();
+    }
+  };
 });
 
 
