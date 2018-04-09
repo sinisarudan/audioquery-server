@@ -23,16 +23,18 @@
 	<input type="range" min="0" value="{{sound.currentTime | sectime | date:'mm:ss'}}" max="{{freesound.duration}}" step="any" id="slider-{{freesound.id}}" ng-model="seekpos" ng-change="setseek(seekpos)"></input> </p>
 
 
-<div class="imgcontainer" id="{{containerid}}">
+<div id="{{containerid}}" class="dragcontainer" >
 
 	<!-- this works now -->
 	<div drag-me id="{{windowid}}" class="draggable ui-widget-content smalltext">
-	<p>Drag</p>
+	<p>< ></p>
 
 	<div class="smalltext imgpointer"></div>
 
 	</div>
+</div>
 
+<div id="{{containerid}}" class="imgcontainer" >
 
 	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false; "/>
 </div>

@@ -151,6 +151,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
 
           console.log($scope.windowid);
+          console.log($scope.containerid);
 
           // var resizableConfig = {containment: $scope.containerid};
           // var draggableConfig = {containment: $scope.containerid};
@@ -159,8 +160,12 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           // jQuery($scope.windowid).draggable(resizableConfig);  
           // jQuery($scope.windowid).css('cursor:pointer'); 
 
+          // var containment = $( $scope.windowid ).draggable( "option", "containment" );
+ 
           //this works 
-          jQuery($scope.windowid).draggable();
+          // jQuery($scope.windowid).draggable({containment:'parent'});
+
+
        
 
           sound.crossOrigin = "anonymous";
@@ -409,7 +414,7 @@ app.directive('dragMe', function() {
   return {
     restrict: 'A',
     link: function(scope, elem, attr, ctrl) {
-      elem.draggable();
+      elem.draggable({containment:'parent'});
     }
   };
 });

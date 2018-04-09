@@ -83,13 +83,6 @@ section {
     /
 }
 
-.smallimg {
-    border: 1px solid blue;
-    position: relative;
-    width: 200px;
-    height: 50px;
-}
-
 .draggable { 
 /*    border: 1px solid white;
     width: 150px; 
@@ -97,19 +90,33 @@ section {
     padding: 0.5em;
     color : white;*/
 
-    border: 1px solid white;
-    height: 10px;
+    /*border: 1px solid white;*/
+    height: 100%;
     /*width: 90px;*/
     width: 10%;
-    padding: 0.5em;
+    /*padding: 0.5em;*/
     background-color: red;
     z-index: 1000;
 
 
      }
 
+.dragcontainer{
+    border: 0.5px solid red;
+    height: 10px;
+    width: 100%; 
+}
+
+.smallimg {
+    /*border: 1px solid blue;*/
+    position: relative;
+    width: 200px;
+    height: 50px;
+}
+
+
 .imgcontainer{
-    border: 1px solid yellow;
+    /*border: 1px solid yellow;*/
     height: 50px;
     width: 100%; 
 }
@@ -124,7 +131,6 @@ section {
     border: 1px solid white;
     height: 10px;
     width: 10%;
->>>>>>> 49e8e35adc058dc68d30dd0afe3d058a58a7f437
     background-color: red;
 }*/
 
@@ -579,6 +585,7 @@ z-index: 1;
 .volctr {
     position: relative;
     width: 70px;
+    width: 100%;
     z-index: 10;
 
 }
