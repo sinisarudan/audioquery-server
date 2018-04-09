@@ -117,7 +117,9 @@ section {
 
 .imgcontainer{
     /*border: 1px solid yellow;*/
+    position: relative;
     height: 50px;
+    z-index: 0;
     width: 100%; 
 }
 
@@ -431,6 +433,96 @@ input[type=range]:focus::-ms-fill-upper {
     background: #ffffff;
 }
 
+/*seek range*/
+
+input[type=range].seekrange {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 10px 0;
+  position: absolute;
+  z-index: 30;
+}
+input[type=range].seekrange:focus {
+  outline: none;
+}
+input[type=range].seekrange::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background: #000;
+  border-radius: 0px;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+input[type=range].seekrange::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  border: 0px solid #000000;
+  height: 50px;
+  width: 5px;
+  border-radius: 0px;
+  background: #ff0000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10px;
+}
+input[type=range].seekrange:focus::-webkit-slider-runnable-track {
+  background: transparent;
+}
+input[type=range].seekrange::-moz-range-track {
+  width: 100%;
+  height: 0px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  background: rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+input[type=range].seekrange::-moz-range-thumb {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  border: 0px solid #000000;
+  height: 50px;
+  width: 2px;
+  border-radius: 0px;
+  background: #ee0000;
+  cursor: pointer;
+}
+input[type=range].seekrange::-ms-track {
+  width: 100%;
+  height: 0px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].seekrange::-ms-fill-lower {
+  background: transparent;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range].seekrange::-ms-fill-upper {
+  background: transparent;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range].seekrange::-ms-thumb {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  border: 0px solid #000000;
+  height: 50px;
+  width: 2px;
+  border-radius: 0px;
+  background: #ee0000;
+  cursor: pointer;
+  height: 30px;
+}
+input[type=range].seekrange:focus::-ms-fill-lower {
+  background: transparent;
+}
+input[type=range].seekrange:focus::-ms-fill-upper {
+  background: transparent;
+}
+
+
 
 
 #slider {
@@ -694,7 +786,12 @@ z-index: 1;
 }
 
     .smallimg {
-        width: 100%;
+    width: 100%;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     }
 
     .info {

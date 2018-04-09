@@ -139,7 +139,10 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           $scope.soundvolume = 1;
           $scope.soundspeed = 1;
           $scope.isPlaying = false;
-          $scope.seekpos = sound.currentTime;
+          $scope.seekpos = 0;
+          if (sound.currentTime){
+            $scope.seekpos = sound.currentTime;
+          };
           $scope.durationMax = sound.duration;
 
 
@@ -147,26 +150,12 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           var msource;
 
           $scope.windowid = 'imgwindow' + audiodata.playerid;
-          $scope.containerid = '#windowcont' + audiodata.playerid;
+          $scope.containerid = 'windowcont' + audiodata.playerid;
 
 
           console.log($scope.windowid);
           console.log($scope.containerid);
 
-          // var resizableConfig = {containment: $scope.containerid};
-          // var draggableConfig = {containment: $scope.containerid};
-
-          // jQuery($scope.windowid).resizable(resizableConfig);  
-          // jQuery($scope.windowid).draggable(resizableConfig);  
-          // jQuery($scope.windowid).css('cursor:pointer'); 
-
-          // var containment = $( $scope.windowid ).draggable( "option", "containment" );
- 
-          //this works 
-          // jQuery($scope.windowid).draggable({containment:'parent'});
-
-
-       
 
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
@@ -176,7 +165,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
           sound.isPlaying = true;
-          sound.currentTime.isChanged = false;
+   
 
           ////////////////////////////////////////////////
           //do the request for the sound
@@ -247,6 +236,12 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
               }
               counter++;
             }
+
+        $scope.$apply(function () {
+          $scope.seekpos = sound.currentTime;
+        })
+
+
           }
 
           sound.onpause = function() {
@@ -292,24 +287,44 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         }
 
-        
+        seekslider = document.getElementById("slider-" + audiodata.playerid);
+
+        sound.addEventListener("timeupdate", function(){ seektimeupdate(); });
 
         $scope.setseek = function(val){
 
-          sound.currentTime.isChanged = true;
-          sound.currentTime=val;
-          // console.log(sound.currentTime);
-          // console.log("slider says" + val);
-          // console.log("duration is" + sound.duration);
-          sound.currentTime.isChanged = false;
 
-          // console.log($scope.soundspeed);
-          // source.playbackRate = 1/val;
-          // sound.currentTime = 2;
-          // msource.playbackRate = 1/val;
-          // borderval = val + 'px';
+          sound.currentTime=val;
 
         }
+
+
+        function seektimeupdate(){
+
+        seekslider = document.getElementById("slider-" + audiodata.playerid);
+        
+        var nt = sound.currentTime;
+        seekslider.value = nt;
+        //console.log(nt);
+        var curmins = Math.floor(sound.currentTime / 60);
+        var cursecs = Math.floor(sound.currentTime - curmins * 60);
+        var durmins = Math.floor(sound.duration / 60);
+        var dursecs = Math.floor(sound.duration - durmins * 60);
+        if(cursecs < 10){ cursecs = "0"+cursecs; }
+        if(dursecs < 10){ dursecs = "0"+dursecs; }
+        if(curmins < 10){ curmins = "0"+curmins; }
+        if(durmins < 10){ durmins = "0"+durmins; }
+  
+  }
+
+         $scope.$watch('sound.currentTime', function(newValue, oldValue) {
+        //if (newValue)
+        //   //   console.log($scope.loop.booleanVal);
+        //   $scope.seekpos = sound.currentTime;
+        $('#')
+        console.log(newValue);
+        });
+
 
         $scope.removethis = function() {
           //$scope.$parent.sounds.splice(index, 1);

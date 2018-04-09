@@ -12,31 +12,30 @@
 <a class="playbtn fa fa-play" ng-class="{'disabled': !isPlaying}" ng-click="playsound()"></a>
 
 <p class="smalltext volctr">
-	<span>vol: {{soundvolume | number: 2}} </span><input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="slider-{{freesound.id}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input>  </p>
+	<input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="slider-{{freesound.id}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span>vol: {{soundvolume | number: 2}} </span> </p>
 
 <p class="smalltext speedctr">
-	<span>X: {{soundspeed | number: 2}} </span><input type="range" min="0.1" value="1" max="4" step="any" id="slider-{{freesound.id}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input>  </p>
+	<input type="range" min="0.1" value="1" max="4" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span>X: {{soundspeed | number: 2}} </span>  </p>
 
 
-<p class="smalltext seekctr">
-	<span>seek: {{seekpos | number: sectime | date:'mm:ss'}} </span>
-	<input type="range" min="0" value="{{sound.currentTime | sectime | date:'mm:ss'}}" max="{{freesound.duration}}" step="any" id="slider-{{freesound.id}}" ng-model="seekpos" ng-change="setseek(seekpos)"></input> </p>
 
+<!--<div id="{{containerid}}" class="dragcontainer" >
 
-<div id="{{containerid}}" class="dragcontainer" >
-
-	<!-- this works now -->
+	 this works now 
 	<div drag-me id="{{windowid}}" class="draggable ui-widget-content smalltext">
 	<p>< ></p>
 
 	<div class="smalltext imgpointer"></div>
 
 	</div>
-</div>
+</div>-->
+<input type="range" min="0" value="{{sound.currentTime}}" max="{{freesound.duration}}" step="any" id="slider-{{audiodata.playerid}}" ng-model="seekpos" ng-change="setseek(seekpos)" class="seekrange"></input>
+<div id="img{{containerid}}" class="imgcontainer" >
+	
 
-<div id="{{containerid}}" class="imgcontainer" >
+	
 
-	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false; "/>
+	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false;" draggable="false"/>
 </div>
 
 <!-- <div id="draggable" class="ui-widget-content smalltext">
@@ -47,7 +46,7 @@
   <p>Drag</p>
 </div> -->
 
-<span class="smalltext audiodata">{{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
+<span class="smalltext audiodata">{{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} <span>seek: {{seekpos | number: sectime | date:'mm:ss'}}</span>
 
 <div id="audio{{audiodata.playerid}}"></div>
 
