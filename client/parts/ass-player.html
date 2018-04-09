@@ -24,24 +24,15 @@
 
 
 <div class="imgcontainer" id="{{containerid}}">
-	<!-- <div class="imgwindow ui-widget-content" id="{{windowid}}"> -->
 
-<!-- this doesn't work -->
-<!-- 		<div id="{{windowid}}" class="draggable ui-widget-content smalltext">
- 		 <p>Drag</p>
-		</div> -->
+	<!-- this works now -->
+	<div drag-me id="{{windowid}}" class="draggable ui-widget-content smalltext">
+	<p>Drag</p>
 
-<!-- this works -->
-<div id="imgwindow2" class="draggable ui-widget-content smalltext">
-  <p>Drag</p>
-</div>
+	<div class="smalltext imgpointer"></div>
 
-<!-- this also works -->
-<!-- <div draggable id="navigator" class="draggable ui-widget-content smalltext">
-  <p>{{windowid}}</p>
-</div> -->
-<!-- 		<div class="smalltext imgpointer"></div>
-		</div> -->
+	</div>
+
 
 	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false; "/>
 </div>
