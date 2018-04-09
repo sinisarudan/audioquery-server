@@ -156,6 +156,7 @@ section {
     width: 200px;
     float: left;
     margin: 5px;
+    position: relative;
 }
 
 .info {
@@ -342,96 +343,8 @@ button span.glyphicon {
 
 /*range http://danielstern.ca/range.css/#/*/
 
-input[type=range] {
-    -webkit-appearance: none;
-    display: inline;
-    width: 120px;
-    margin: 10px 0;
-
-}
 
 
-
-input[type=range]:focus {
-    outline: none;
-}
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4.3px;
-    cursor: pointer;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-    background: #ffffff;
-    border-radius: 1.3px;
-    border: 1px solid #000000;
-}
-input[type=range]::-webkit-slider-thumb {
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    border: 1.1px solid #000000;
-    height: 15px;
-    width: 15px;
-    border-radius: 0px;
-    background: #ffffff;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-top: -6.35px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ffffff;
-}
-input[type=range]::-moz-range-track {
-    width: 100%;
-    height: 4.3px;
-    cursor: pointer;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-    background: #ffffff;
-    border-radius: 1.3px;
-    border: 1px solid #000000;
-}
-input[type=range]::-moz-range-thumb {
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    border: 1.1px solid #000000;
-    height: 15px;
-    width: 15px;
-    border-radius: 0px;
-    background: #ffffff;
-    cursor: pointer;
-}
-input[type=range]::-ms-track {
-    width: 100%;
-    height: 4.3px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-    background: #fcfcfc;
-    border: 1px solid #000000;
-    border-radius: 2.6px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-}
-input[type=range]::-ms-fill-upper {
-    background: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 2.6px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-}
-input[type=range]::-ms-thumb {
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    border: 1.1px solid #000000;
-    height: 15px;
-    width: 15px;
-    border-radius: 0px;
-    background: #ffffff;
-    cursor: pointer;
-    height: 4.3px;
-}
-input[type=range]:focus::-ms-fill-lower {
-    background: #ffffff;
-}
-input[type=range]:focus::-ms-fill-upper {
-    background: #ffffff;
-}
 
 /*seek range*/
 
@@ -549,7 +462,7 @@ input[type=range].seekrange:focus::-ms-fill-upper {
     bottom: 0px;
 }
 
-/* slider */
+/* slider interface */
 
 
 input[type=range] {
@@ -562,10 +475,10 @@ input[type=range]:focus {
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 3px;
+  height: 2pt;
   cursor: pointer;
   background: #fff;
-  border: 1px solid #fff;
+  border: 0pt solid #fff;
 }
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
@@ -660,12 +573,13 @@ input[type=range]:focus::-ms-fill-upper {
 
 .player .audiodata {
     position: relative;
+    display: block;
     top:0px;
     color: #fff;
     z-index: 10;
     width: 180px;
-    height: 35px;
     overflow: hidden;
+    margin-top: 5px;
 }
 
 #audios img {
@@ -689,7 +603,7 @@ z-index: 1;
 
 .speedctr {
     position: relative;
-    width: 70px;  
+    width: 100%;  
     z-index: 10;
 }
 
@@ -728,6 +642,13 @@ z-index: 1;
     color: #f00;
 }
 
+.queue {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    z-index: 30;
+}
 
 /* about */
 
@@ -783,6 +704,7 @@ z-index: 1;
     width: calc(100% - 10px);
     float: left;
     margin: 5px;
+    position: relative;
 }
 
     .smallimg {

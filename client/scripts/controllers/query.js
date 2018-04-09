@@ -187,6 +187,22 @@ $scope.player = function(itemid) {
 
 }
 
+$scope.queuesound = function(itemid) {
+  var playerid = playersCounter++;
+
+  //adding to sounds
+  $scope.sounds.unshift({id: itemid, newsound: 0, playerid: playerid});
+
+  //change url
+  $scope.updateAddress();
+
+  //tell the sound to play
+    //var played = document.getElementById("aud" + itemid);
+      //played.play();
+
+
+}
+
 //to write logs in the console
 $scope.logger = function(message) {
   var marker = 'audioquery:';

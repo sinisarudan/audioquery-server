@@ -1,21 +1,25 @@
 <div class="player" id="sound{{''+audiodata.playerid}}" ng-switch on="audiodata.newsound">
 
+
+
 <!--<input class="loopbtn" type="checkbox" ng-model="loop">-->
-
 <a class="removebtn fa fa-times" ng-class="" ng-click="removethis()"></a>
-<a class="playbtn fa fa-play" ng-class="" ng-click="playsound()"></a>
+
+
+<a class="playbtn fa fa-play" ng-click="playsound()" ng-hide="isPlaying" ng-class="" ></a>
+<a class="playbtn fa fa-pause" ng-click="playsound()" ng-hide="!isPlaying" ng-class="" ></a>
 <a class="playbtn fa fa-stop" ng-class="" ng-click="stopsound()"></a>
-<a class="playbtn fa fa-pause" ng-class="" ng-click="pausesound()"></a>
-<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop.booleanVal}" ng-click="loop.booleanVal = !loop.booleanVal"></a>
 
 
-<a class="playbtn fa fa-play" ng-class="{'disabled': !isPlaying}" ng-click="playsound()"></a>
+<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop.booleanValue}" ng-click="loop.booleanValue = !loop.booleanValue"></a>
+
+
 
 <p class="smalltext volctr">
-	<input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="slider-{{freesound.id}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span>vol: {{soundvolume | number: 2}} </span> </p>
+	<input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="vol-{{audiodata.playerid}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span>vol: {{soundvolume | number: 2}} </span> </p>
 
 <p class="smalltext speedctr">
-	<input type="range" min="0.1" value="1" max="4" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span>X: {{soundspeed | number: 2}} </span>  </p>
+	<input type="range" min="0.1" value="1" max="4" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span> Xtime: {{soundspeed | number: 2}} </span>  </p>
 
 
 
@@ -29,6 +33,9 @@
 
 	</div>
 </div>-->
+	<span class="smalltext audiodata">{{seekpos | sectime | date:'mm:ss'}} | {{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
+
+
 <input type="range" min="0" value="{{sound.currentTime}}" max="{{freesound.duration}}" step="any" id="slider-{{audiodata.playerid}}" ng-model="seekpos" ng-change="setseek(seekpos)" class="seekrange"></input>
 <div id="img{{containerid}}" class="imgcontainer" >
 	
@@ -46,7 +53,6 @@
   <p>Drag</p>
 </div> -->
 
-<span class="smalltext audiodata">{{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} <span>seek: {{seekpos | number: sectime | date:'mm:ss'}}</span>
 
 <div id="audio{{audiodata.playerid}}"></div>
 

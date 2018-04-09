@@ -38,10 +38,11 @@
               <div>
 
 
-              <div ng-repeat="item in results | array | orderBy:'duration'" class="result" id="{{'#' + item.id}}" ng-click="player({{item.id}}); logger({{item.id}})" analytics-on analytics-event="Click" analytics-category="Sounds" analytics-label="item" >
+              <div ng-repeat="item in results | array | orderBy:'duration'" class="result" id="{{'#' + item.id}}"  analytics-on analytics-event="Click" analytics-category="Sounds" analytics-label="item" >
 
-                    <img class="smallimg {{item.duration < 1 ? 'true' : 'false'}}" ng-src="{{item.images['spectral_m']}}" /><br/>
-                    <span class="info" >{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> <br/>
+                    <img class="smallimg {{item.duration < 1 ? 'true' : 'false'}}" ng-src="{{item.images['spectral_m']}}" ng-click="player({{item.id}}); logger({{item.id}})"/><br/>
+                    <span class="info" >{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> 
+                    <a class="fa fa-plus queue" ng-click="queuesound({{item.id}})"></a> 
 
               </div>
 

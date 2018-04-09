@@ -164,7 +164,10 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           // sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
-          sound.isPlaying = true;
+
+          $scope.isPlaying = false;
+
+          //$scope.isPlaying = sound.isPlaying;
    
 
           ////////////////////////////////////////////////
@@ -223,6 +226,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           if (audiodata.newsound === 1) {
             sound.autoplay = 'autoplay';
+            $scope.isPlaying = true;
           }
           counter=0;
 
@@ -253,18 +257,100 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           //   console.log($scope.loop.booleanVal);
             sound.addEventListener('ended', function() {
               if ($scope.loop.booleanVal) {
+
                 this.currentTime = 0;
-                this.play();
+                $scope.isPlaying = false;
+                $scope.playsound();
+                // sound.play();
                 
               }
               else{
+               
+               //console.log($scope.loop.booleanVal);
+                // sound.pause();
+                this.currentTime = 0;
+
+                 $scope.playsound();
+                 // sound.pause();
+                
                 $scope.$parent.logger2('loopstop: ' + $scope.freesound.name);
                 counter=0;
               }
+              return $scope.isPlaying; 
 
           }, false);
         }, true);
 
+
+
+        $scope.playsound = function() {
+
+         if ($scope.isPlaying){
+          sound.pause();
+          $scope.isPlaying = false;
+          console.log('play' + $scope.isPlaying);
+          }
+          else{
+
+            var playPromise = sound.play();
+             $scope.isPlaying = true;
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+
+                // $scope.isPlaying = true;
+                console.log('play' + $scope.isPlaying);
+      
+            // Automatic playback started!
+            // Show playing UI.
+            })
+            .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+            });
+            }
+          }
+
+          // source.start(0);
+          // itemsrc.start(0);
+        }  
+
+
+      //   $scope.playsound = function() {
+
+          
+      //     var playPromise = sound.play();
+
+      //     if (playPromise !== undefined) {
+      //         playPromise.then(_ => {
+
+      //         if ($scope.isPlaying){
+      //           sound.pause();
+      //           $scope.isPlaying = false;
+      //       console.log('pause' + $scope.isPlaying);
+            
+
+      //     }
+      //     else {
+      //         //sound.play();
+      //         $scope.isPlaying = true;
+      //         console.log('hu');
+
+      //     }
+      // // Automatic playback started!
+      // // Show playing UI.
+      //     })
+      //     .catch(error => {
+      // // Auto-play was prevented
+      // // Show paused UI.
+      //     });
+      //     }
+
+
+
+      //     // source.start(0);
+      //     // itemsrc.start(0);
+      //   }  
 
 
         $scope.setvolume = function(val){
@@ -287,12 +373,21 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         }
 
+        $scope.stopsound = function(){
+          
+          $scope.isPlaying = false;
+          sound.pause();
+          sound.currentTime = 0;
+          // msource.playbackRate = 1/val;
+          // borderval = val + 'px';
+
+        }
+
         seekslider = document.getElementById("slider-" + audiodata.playerid);
 
         sound.addEventListener("timeupdate", function(){ seektimeupdate(); });
 
         $scope.setseek = function(val){
-
 
           sound.currentTime=val;
 
@@ -332,34 +427,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           $scope.$parent.logger2('removed: ' + $scope.freesound.name);
         }
 
-        $scope.playsound = function() {
-
-          this.isPlaying=!this.isPlaying;
-
-          if (!this.isPlaying){
-
-            sound.play();
-            console.log(sound.currentTime);
-          }
-            
-          else{
-            sound.pause();
-            console.log("paused");
-          }
-          
-
-          //$scope.$parent.sounds.splice(index, 1);
-          
-
-          
-
-          //else
-
-          // sound.pause();
-          // sound.start();
-          // source.start(0);
-          // itemsrc.start(0);
-        }
 
 
         // console.log(msource.buffer);
