@@ -15,17 +15,40 @@
 
 
 <p class="smalltext seekctr">
-	<span>seek: {{seekpos | number: sectime | date:'mm:ss'}} </span><input type="range" min="0" value="{{sound.currentTime | sectime | date:'mm:ss'}}" max="{{freesound.duration}}" step="any" id="slider-{{freesound.id}}" ng-model="seekpos" ng-change="setseek(seekpos)"></input> </p>
+	<span>seek: {{seekpos | number: sectime | date:'mm:ss'}} </span>
+	<input type="range" min="0" value="{{sound.currentTime | sectime | date:'mm:ss'}}" max="{{freesound.duration}}" step="any" id="slider-{{freesound.id}}" ng-model="seekpos" ng-change="setseek(seekpos)"></input> </p>
 
 
 <div class="imgcontainer" id="{{containerid}}">
-	<div class="imgwindow" id="{{windowid}}">
-		<div class="imgpointer"></div>
-	</div>
+	<!-- <div class="imgwindow ui-widget-content" id="{{windowid}}"> -->
+
+<!-- this doesn't work -->
+<!-- 		<div id="{{windowid}}" class="draggable ui-widget-content smalltext">
+ 		 <p>Drag</p>
+		</div> -->
+
+<!-- this works -->
+<div id="imgwindow2" class="draggable ui-widget-content smalltext">
+  <p>Drag</p>
+</div>
+
+<!-- this also works -->
+<!-- <div draggable id="navigator" class="draggable ui-widget-content smalltext">
+  <p>{{windowid}}</p>
+</div> -->
+<!-- 		<div class="smalltext imgpointer"></div>
+		</div> -->
 
 	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false; "/>
 </div>
 
+<!-- <div id="draggable" class="ui-widget-content smalltext">
+  <p>Drag</p>
+</div> -->
+
+<!-- <div id="imgwindow2" class="draggable ui-widget-content smalltext">
+  <p>Drag</p>
+</div> -->
 
 <span class="smalltext audiodata">{{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
 

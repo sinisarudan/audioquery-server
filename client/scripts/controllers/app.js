@@ -135,9 +135,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
 
 
-          $scope.windowid = 'imgwindow' + audiodata.playerid;
-          $scope.containerid = '#windowcont' + audiodata.playerid;
-
           $scope.loop = false;
           $scope.soundvolume = 1;
           $scope.soundspeed = 1;
@@ -146,18 +143,38 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           $scope.durationMax = sound.duration;
 
 
-
           var myBuffer;
           var msource;
 
+          $scope.windowid = 'imgwindow' + audiodata.playerid;
+          $scope.containerid = '#windowcont' + audiodata.playerid;
 
-          
-          var resizableConfig = {containment: $scope.containerid};
-          var draggableConfig = {containment: $scope.containerid};
 
-          jQuery($scope.windowid).resizable(resizableConfig);  
-          jQuery($scope.windowid).draggable(resizableConfig);  
-          jQuery($scope.windowid).css('cursor:pointer'); 
+          console.log($scope.windowid);
+
+          // var resizableConfig = {containment: $scope.containerid};
+          // var draggableConfig = {containment: $scope.containerid};
+
+          // jQuery($scope.windowid).resizable(resizableConfig);  
+          // jQuery($scope.windowid).draggable(resizableConfig);  
+          // jQuery($scope.windowid).css('cursor:pointer'); 
+
+          // jQuery($scope.windowid).draggable();  
+
+          // $scope.moveme = $( function() {
+          // $( $scope.windowid ).draggable();
+          // } );
+
+          //this works
+
+          // jQuery( "#navigator" ).draggable();
+
+          //this doesn't
+          // jQuery( $scope.windowid ).draggable();
+
+          //this strangely works but I guess it's like having the same id
+          jQuery( imgwindow2 ).draggable();
+       
 
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;

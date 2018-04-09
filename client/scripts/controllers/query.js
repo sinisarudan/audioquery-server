@@ -251,6 +251,8 @@ $scope.play = function(itemsrc, itemid) {
 
   //create audio element
   var sound      = document.createElement('audio');
+
+  //create audio buffer
   sound.crossOrigin = "anonymous";
   sound.id       = 'aud' + itemid;
   sound.controls = 'controls';
