@@ -60,3 +60,9 @@ typings/
 
 start.sh
 
+.DS_Store
+
+client/scripts/.DS_Store
+
+
+
