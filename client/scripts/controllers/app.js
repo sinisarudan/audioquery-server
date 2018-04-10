@@ -288,7 +288,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
          if ($scope.isPlaying){
           sound.pause();
           $scope.isPlaying = false;
-          console.log('play' + $scope.isPlaying);
+          //console.log('play' + $scope.isPlaying);
           }
           else{
 
@@ -299,7 +299,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                 playPromise.then(_ => {
 
                 // $scope.isPlaying = true;
-                console.log('play' + $scope.isPlaying);
+                //console.log('play' + $scope.isPlaying);
       
             // Automatic playback started!
             // Show playing UI.

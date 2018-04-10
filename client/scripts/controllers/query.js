@@ -187,6 +187,15 @@ $scope.player = function(itemid) {
 
 }
 
+$scope.sicronize = function() {
+  var list = document.getElementsByTagName("audio");
+  //console.log(list);
+  for (i= 0; i < list.length; i++) {
+    list[i].currentTime = 0;
+  }
+
+}
+
 $scope.queuesound = function(itemid) {
   var playerid = playersCounter++;
 

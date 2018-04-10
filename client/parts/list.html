@@ -8,6 +8,7 @@
                     <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(next)"></button>
                     <button ng-hide="recording" class="next-pag fa fa-circle" ng-click="startRecording(); recording = true" style="color:#f00"></button>
                     <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
+                    <button class="next-pag fa fa-loop" ng-click="sicronize()"></button>
                 </div><br>
 
 
@@ -42,6 +43,8 @@
 
                     <img class="smallimg {{item.duration < 1 ? 'true' : 'false'}}" ng-src="{{item.images['spectral_m']}}" ng-click="player({{item.id}}); logger({{item.id}})"/><br/>
                     <span class="info" >{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> 
+                    <a class="fa fa-plus queue" ng-click="queuesound({{item.id}})"></a> 
+
                      
                      
 
