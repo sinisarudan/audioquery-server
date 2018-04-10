@@ -89,7 +89,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
       var audiodata = $scope.audiodata;
       var req = {
         method: 'GET', 
-        url: '/freesound/sounds/' + audiodata.id + '/?fields=id,name,previews,images,duration,license,username' ,
+        url: '/freesound/sounds/' + audiodata.id + '/?fields=id,name,previews,images,duration,license,username,url' ,
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'

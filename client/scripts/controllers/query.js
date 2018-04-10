@@ -19,7 +19,7 @@ $scope.about= 'estreito';
 
 $scope.$watch('query', function() {
   $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
-  $scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
+  //$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
 });
 

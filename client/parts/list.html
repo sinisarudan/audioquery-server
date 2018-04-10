@@ -42,7 +42,8 @@
 
                     <img class="smallimg {{item.duration < 1 ? 'true' : 'false'}}" ng-src="{{item.images['spectral_m']}}" ng-click="player({{item.id}}); logger({{item.id}})"/><br/>
                     <span class="info" >{{item.duration | sectime | date:'mm:ss'}} | {{item.name}}</span> 
-                    <a class="fa fa-plus queue" ng-click="queuesound({{item.id}})"></a> 
+                     
+                     
 
               </div>
 

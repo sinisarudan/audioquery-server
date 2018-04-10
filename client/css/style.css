@@ -316,7 +316,7 @@ width: 24px;
     width: 25px;
     height: 25px;
     background-color: #fff;
-    border: 1px solid #000;
+    border: 1px solid #fff;
     border-radius: 0px;
     margin-top: 5px;
     text-align: center;
@@ -649,6 +649,15 @@ z-index: 1;
     color: #fff;
     z-index: 30;
 }
+
+.download {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #999;
+    z-index: 30;
+}
+
 
 /* about */
 
