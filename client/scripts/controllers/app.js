@@ -225,7 +225,8 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           document.getElementById(divid).appendChild(sound);
 
           if (audiodata.newsound === 1) {
-            sound.autoplay = 'autoplay';
+            //sound.autoplay = 'autoplay';
+            sound.play();
             $scope.isPlaying = true;
           }
           counter=0;
