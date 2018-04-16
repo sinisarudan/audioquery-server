@@ -27,7 +27,9 @@
     
 </head>
 <body>
-
+<audio id="blip" preload>
+<source src="parts/blip.mp3"></source>
+</audio>
     
 <div ng-controller="queryController">
 
@@ -37,6 +39,7 @@
 
     
 </div>
+
 
 
 </body>
@@ -61,6 +64,10 @@
 
     sources = [];
 
+document.addEventListener('touchstart', function () {
+    document.getElementsById('blip')[0].play();
+    document.getElementsById('blip')[0].pause();
+});
 
  
 

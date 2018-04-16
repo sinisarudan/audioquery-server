@@ -201,7 +201,9 @@ section {
     outline: 1px solid black;
 }
 
-
+.audioplayer {
+  display: none;
+}
 
 #menu {
     width: 100%;
