@@ -159,8 +159,8 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           sound.crossOrigin = "anonymous";
           sound.id       = 'aud' + audiodata.playerid;
-          sound.preload = 'preload';
-          // sound.controls = 'controls';
+          //sound.preload = 'preload';
+           sound.controls = 'controls';
           // sound.loop = 'loop';
           sound.src      = itemsrc;
           sound.type     = 'audio/mpeg';
