@@ -226,6 +226,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           if (audiodata.newsound === 1) {
             //sound.autoplay = 'autoplay';
+            sound.load();
             sound.play();
             $scope.isPlaying = true;
           }
