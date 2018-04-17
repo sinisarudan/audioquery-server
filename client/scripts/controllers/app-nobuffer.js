@@ -148,7 +148,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           };
           $scope.durationMax = sound.duration;
 
-          $scope.source = audioCtx.createBufferSource();
 
           var myBuffer;
           var msource;
@@ -175,50 +174,52 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
    
           // buffer stuff
           ////////////////////////////////////////////////
-          // $scope.buffersound = function(){
-          //do the request for the sound
-          var request = new XMLHttpRequest();
-          request.open("GET", itemsrc, true);
-          request.responseType = "arraybuffer";
+          $scope.buffersound = function(){
+            //do the request for the sound
+            var request = new XMLHttpRequest();
+            request.open("GET", itemsrc, true);
+            request.responseType = "arraybuffer";
 
-          request.onload = function() {
-          audioCtx.decodeAudioData(request.response, function(buffer) {
-                  if (!buffer) {
-                      alert('error decoding file data: ' + itemsrc);
-                      return;
-                  }
-                  // loader.bufferList[index] = buffer;
-                  // if (++loader.loadCount == loader.urlList.length)
-                  //     loader.onload(loader.bufferList);
-                  // console.log(buffer);
-                  // msource.buffer = buffer;
-                  // console.log(buffer.length);
+            request.onload = function() {
+            audioCtx.decodeAudioData(request.response, function(buffer) {
+                    if (!buffer) {
+                        alert('error decoding file data: ' + itemsrc);
+                        return;
+                    }
+                    // loader.bufferList[index] = buffer;
+                    // if (++loader.loadCount == loader.urlList.length)
+                    //     loader.onload(loader.bufferList);
+                    // console.log(buffer);
+                    // msource.buffer = buffer;
+                    // console.log(buffer.length);
 
-                  // myBuffer = buffer;
-                  // msource = audioCtx.createBufferSource();
-                  // myBuffer.start(0);
-                  // myBuffer.loop;
+                    // myBuffer = buffer;
+                    // msource = audioCtx.createBufferSource();
+                    // myBuffer.start(0);
+                    // myBuffer.loop;
 
-                  response = request.response;
-                  // console.log(response);
-                  // here we create copies
+                    response = request.response;
+                    // console.log(response);
+                    // here we create copies
 
-                  
-                  // // something playing id
-                  
-                  $scope.source.buffer = buffer;
-                  // buffers.push(source.buffer);
-                  // console.log(" in creation" + buffers);
-
-                  //console.log(source.buffer);
-                  //source.connect(gainNode);
-                  // msource.buffer = myBuffer;
-                  // msource.connect(gainNode);
+                    var source   = audioCtx.createBufferSource();
+                    source.buffer = buffer;
+                    buffers.push(source.buffer);
+                    console.log(buffers);
 
 
-              }    
-            );
-          }
+                    //console.log(source.buffer);
+                    //source.connect(gainNode);
+                    
+
+
+                    // msource.buffer = myBuffer;
+                    // msource.connect(gainNode);
+
+
+                }    
+              );
+            }
 
             request.onerror = function() {
               alert('BufferLoader: XHR error');        
@@ -227,7 +228,12 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
             request.send();
             // console.log(myBuffer);
             //////////////////////////////////
-  
+
+          }
+
+          
+
+          
 
           // put element on playlist
           document.getElementById(divid).appendChild(sound);
@@ -235,10 +241,9 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           if (audiodata.newsound === 1) {
             sound.autoplay = 'autoplay';
             $scope.isPlaying = true;
+            $scope.buffersound;
           }
           counter=0;
-
-          //audiobuffer.
 
           sound.onplay = function() {
             if(!$scope.loop){
@@ -251,9 +256,11 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
               counter++;
             }
 
-            $scope.$apply(function () {
-              $scope.seekpos = sound.currentTime;
-            })
+        $scope.$apply(function () {
+          $scope.seekpos = sound.currentTime;
+        })
+
+
           }
 
           sound.onpause = function() {
@@ -293,32 +300,15 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         $scope.playsound = function() {
 
-          var sourcePlay = audioCtx.createBufferSource();
-
          if ($scope.isPlaying){
           sound.pause();
-
-          
-          sourcePlay.disconnect();
-          // sourcePlay.stop(0);
-          sourcePlay = null;
-
           $scope.isPlaying = false;
           console.log('play' + $scope.isPlaying);
-          //console.log(" in playing" + buffers);
           }
           else{
 
             var playPromise = sound.play();
-
-            
-            sourcePlay.buffer = $scope.source.buffer;
-            sourcePlay.start();
-            sourcePlay.connect(gainNode);
-            sources.push(sourcePlay);
-
              $scope.isPlaying = true;
-            }
 
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
@@ -338,7 +328,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
           // source.start(0);
           // itemsrc.start(0);
- 
+        }  
 
 
       //   $scope.playsound = function() {
@@ -469,10 +459,10 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
     // myBuffer.loop;
       // mySource.connect(gainNode);
 
-        // var msource = audioCtx.createMediaElementSource(sound);
+        var msource = audioCtx.createMediaElementSource(sound);
         
-        // msource.connect(gainNode);
-        // sources.push(msource);
+        msource.connect(gainNode);
+        sources.push(msource);
         //sources.push(source);
         
 
