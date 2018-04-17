@@ -1,4 +1,4 @@
-app.controller('queryController', ['$scope', '$window', '$http', '$location', '$filter', '$sce', function ($scope, $window, $http, $location, $filter, $sce ) {
+app.controller('queryController', ['$scope', '$window', '$http', '$location', '$filter', '$sce',  function ($scope, $window, $http, $location, $filter, $sce ) {
 
 
 var sounds = [];
