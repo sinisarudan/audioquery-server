@@ -191,6 +191,12 @@ section {
     overflow: scroll;
 }
 
+#ch #list {
+   width: calc(100% - 500px);
+    height: 100%;
+    overflow: scroll;
+}
+
 #playlist {
     width: 220px;
     background-color: #fff;
@@ -545,6 +551,18 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* player */
 
+
+#chat {
+  width: 200px;
+  padding-top: 5px;
+    overflow: hidden;
+    float: left;
+    margin: 0;
+    position: relative;
+    background-color: #fff;
+}
+
+
 #audios {
     background-color: #fff;
     margin-top: 0px;
@@ -694,7 +712,6 @@ z-index: 1;
         width: 50%;
         height: 100%;
         overflow: auto;
-        padding: 0 10px;
     }
 
     .busca {
@@ -727,6 +744,22 @@ z-index: 1;
 
     #list {
         width: 50%;
+    }
+
+    #ch {
+      width: 300%;
+    }
+
+    #ch #chat {
+      width: 30%;
+    }
+
+    #ch  #list {
+        width: 30%;
+    }
+
+    #ch #playlist {
+      width: 30%;
     }
 
 .result {
