@@ -435,6 +435,7 @@ var WORKER_PATH = './scripts/controllers/recorderWorker.js';
 
 }]);
 
+
 app.controller('chatController', ['$scope', '$window', '$http', '$location', '$filter', '$sce',  function ($scope, $window, $http, $location, $filter, $sce ) {
 
 
@@ -452,7 +453,7 @@ app.controller('chatController', ['$scope', '$window', '$http', '$location', '$f
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
-  var $inputMessage = $('.inputMessage'); // Input message input box
+  var $inputMessage = $('#chatbox'); // Input message input box
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
