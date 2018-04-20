@@ -470,9 +470,11 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
       // mySource.connect(gainNode);
 
         // var msource = audioCtx.createMediaElementSource(sound);
-        
+//begin old code        
         // msource.connect(gainNode);
         // sources.push(msource);
+//end old code
+
         //sources.push(source);
         
 

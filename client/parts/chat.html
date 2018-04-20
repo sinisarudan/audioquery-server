@@ -1,8 +1,26 @@
+
 <div id="ch">
 
-<section id="chat">
-<input type="text" class="busca control"  placeholder="type your message message"/>
+<section id="chat" ng-controller="chatController">
+<input type="text" class="busca control" class="inputMessage"   placeholder="type your message message"/>
+
 <div id="messages">
+
+<ul class="pages">
+    <li class="chat page">
+      <div class="chatArea">
+        <ul class="messages"></ul>
+      </div>
+      <input class="inputMessage" placeholder="Type here..."/>
+    </li>
+    <li class="login page">
+      <div class="form">
+        <h3 class="title">What's your nickname?</h3>
+        <input  type="text" class="usernameInput" ng-model="chatquery" maxlength="14" />
+      </div>
+    </li>
+  </ul>
+
 
 </div>
 </section>
@@ -45,7 +63,7 @@
     <h5 ng-show="recordings">Recordings</h5>
     <ul id="recordingslist"></ul>
   </div>
- <h1>CHAT</h1>
+ <!-- <h1>CHAT</h1> -->
 
 </section>
 

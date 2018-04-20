@@ -4,17 +4,30 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var index = require('./routes/index');
 
 
 var freesoundApiRouter = require('./routes/freesound');
 var users = require('./routes/users');
+var rooms = require('./routes/room');
 
 var app = express();
+var server = require('http').Server(app);
+// var io = require('socket.io')(server); // Add this here
+var io = require('socket.io')(server); // Add this here
+
+// app.io=io;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -27,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/freesound', freesoundApiRouter);
 app.use('/users', users);
+// app.use('/chat/room', rooms);
+app.use('/chat', rooms);
 app.use('/', index);
 
 app.get('/fs', () => console.log('fs'));
@@ -65,4 +80,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = {app: app, server: server};
