@@ -1,14 +1,6 @@
 <section id="playlist">
 
-<div class="menu" ng-hide="visible">
-                    <input type="text" class="busca control" ng-model="query" placeholder="search"/>
-                    <!--<button class="zoom-out fa fa-minus"></button>-->
-                    <a href="http://playsound.space" target="_blank" style="float:letf;inline"><button class="zoom-in fa fa-plus"></button></a>
-                    <button ng-hide="response.previous == null" class="next-pag resetpar resetimpar fa fa-arrow-left" ng-click="makequery(previous)"></button>
-                    <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(next)"></button>
-                    <button ng-hide="recording" class="next-pag fa fa-circle" ng-click="startRecording(); recording = true" style="color:#f00"></button>
-                    <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
-                </div><br>
+
 
 
 
@@ -32,7 +24,15 @@
 
 <section id="list" >
   
-
+<div class="menu" ng-hide="visible">
+                    <input type="text" class="busca control" ng-model="query" placeholder="search"/>
+                    <!--<button class="zoom-out fa fa-minus"></button>-->
+                    <a href="http://playsound.space" target="_blank" style="float:letf;inline"><button class="zoom-in fa fa-plus"></button></a>
+                    <button ng-hide="response.previous == null" class="next-pag resetpar resetimpar fa fa-arrow-left" ng-click="makequery(previous)"></button>
+                    <button ng-hide="response.next == null" class="next-pag resetpar resetimpar fa fa-arrow-right" ng-click="makequery(next)"></button>
+                    <button ng-hide="recording" class="next-pag fa fa-circle" ng-click="startRecording(); recording = true" style="color:#f00"></button>
+                    <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
+                </div><br>
               <a ng-hide=""> </a>
               <div id="results">
               <div>
