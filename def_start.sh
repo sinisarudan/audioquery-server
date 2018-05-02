@@ -1,3 +1,3 @@
 #!/bin/bash
-FREESOUND_KEY=Hogjozhc9z8Je2vWlhqSueI31frG5dbLazK9GUBg \
+FREESOUND_KEY=putyourkeyhere \
 npm start
