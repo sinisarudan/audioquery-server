@@ -1,0 +1,16 @@
+done
+-- playback ratio
+-- audio buffer
+-- link to freesound
+-- chat
+-- 
+
+
+to do
+-- syncronize the time with the speed
+-- loopstart and loopend
+-- queries from the chat
+-- syncronize player
+-- multiroom chat
+-- sound retrieval on chat
+
