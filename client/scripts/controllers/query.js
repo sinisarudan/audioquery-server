@@ -13,7 +13,7 @@ $scope.recordings = false;
 $scope.about= 'estreito';
 
 
-//$scope.query = 'gun';
+//$scope.query = 'gfun';
 
 
 
@@ -430,6 +430,10 @@ var WORKER_PATH = './scripts/controllers/recorderWorker.js';
   }
 
   window.Recorder = Recorder;
+
+  //master volume
+  var mastervol = function(){
+  }
 
 
 
