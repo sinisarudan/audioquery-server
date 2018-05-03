@@ -84,27 +84,46 @@ section {
 }
 
 .draggable { 
-/*    border: 1px solid white;
-    width: 150px; 
-    height: 150px; 
-    padding: 0.5em;
-    color : white;*/
-
-    /*border: 1px solid white;*/
     height: 100%;
-    /*width: 90px;*/
-    width: 10%;
-    /*padding: 0.5em;*/
+    width: 10px;
     background-color: red;
-    z-index: 1000;
-
+    z-index: 30;
 
      }
 
+
+.loopstart {
+  position: absolute;
+  line-height: 60px;
+  overflow: visible;
+}
+
+.loopend {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  overflow: visible;
+}
+
+.draggable .pointer {
+  height: 65px;
+  width: 1px;
+  background-color: #fff;
+  position: absolute;
+  top:-50px;
+}
+
+.loopend .pointer {
+position: absolute;
+right: 0;
+}
+
 .dragcontainer{
-    border: 0.5px solid red;
-    height: 10px;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+    height: 15px;
     width: 100%; 
+    position: relative;
 }
 
 .smallimg {
