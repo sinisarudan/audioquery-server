@@ -419,6 +419,12 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
             $scope.seekpos = $scope.getCurrentTime();
           }
 
+          // $scope.$watch('masterval', function(newValue, oldValue) {
+
+          // console.log($scope.masterval);
+
+          // }, true);
+
           /*
           $scope.$watch('loop', function(newValue, oldValue) {
           // if (newValue)
@@ -617,6 +623,8 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
         //sources.push(source);
         
+
+
 
       }, function(response) {
         // error.

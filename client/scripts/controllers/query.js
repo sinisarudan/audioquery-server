@@ -285,10 +285,26 @@ $scope.play = function(itemsrc, itemid) {
 
   //binding new objects to sudio context
 
-  var source = audioCtx.createMediaElementSource(sound);
-  source.connect(gainNode);
-  gainNode.connect(audioCtx.destination)
+  // var source = audioCtx.createMediaElementSource(sound);
+  // source.connect(gainNode);
+  // gainNode.connect(audioCtx.destination)
 }
+
+// $scope.$watch('masterval', function(newValue, oldValue) {
+
+// console.log($scope.masterval);
+
+// }, true);
+
+$scope.changevol = function(val){
+
+  $scope.masterval = val;
+
+  gainNode.gain.value = $scope.masterval;
+
+
+}
+
 
 //recorder from thomas vassalo
 
