@@ -21,13 +21,17 @@
 	<input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="vol-{{audiodata.playerid}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span>vol: {{soundvolume | number: 2}} </span> </p>
 
 <p class="smalltext speedctr">
-	<input type="range" min="0.1" value="1" max="4" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span> Xtime: {{soundspeed | number: 2}} </span>  </p>
+	<input type="range" min="0.1" value="1.0" max="3.3" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span> Xtime: {{soundspeed | number: 2}} </span>  </p>
 
 
 
 
 	<span class="smalltext audiodata">{{seekpos | sectime | date:'mm:ss'}} | {{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
 
+<!-- 		<span class="smalltext audiodata">{{seekpos | sectime | date:'mm:ss'}} | {{conversion | sectime | date:'mm:ss'}} | {{freesound.name}} </span> -->
+
+
+<!-- <input type="range" min="0" value="{{seekpos}}" max="{{freesound.duration}}" step="any" id="slider-{{audiodata.playerid}}" ng-model="seekpos" ng-change="setseek(seekpos)" class="seekrange"></input> -->
 
 <input type="range" min="0" value="{{seekpos}}" max="{{freesound.duration}}" step="any" id="slider-{{audiodata.playerid}}" ng-model="seekpos" ng-change="setseek(seekpos)" class="seekrange"></input>
 
