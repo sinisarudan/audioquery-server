@@ -129,6 +129,9 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           $scope.windowid = 'imgwindow' + audiodata.playerid;
           $scope.containerid = 'windowcont' + audiodata.playerid;
 
+          $scope.loopstart = 'start' + audiodata.playerid;
+          $scope.loopend = 'end' + audiodata.playerid;
+
           
 
           var myBuffer;
@@ -178,7 +181,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           
           */
 
-          
+          $scope.newoffset = 
 
 
           $scope.Sound = function(buffer){
@@ -191,18 +194,28 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
             //$scope.playing = true;
             //console.log($scope.loop);
 
+
             
             // $scope.loopStart = 0;
             // $scope.loopEnd = buffer.duration;
 
                 $scope.play =  function() {
                       //$scope.offset = $scope.pausedAt;
-
+                      //var x = $scope.windowid.offsetLeft, y = $scope.windowid.offsetTop;
+                      //console.log(x);
+                      $scope.newoffset = 0;
                       $scope.sourceNode = audioCtx.createBufferSource();
-                      $scope.sourceNode.connect(gainNode);
+
+                      $scope.volume = audioCtx.createGain();
+
+                      $scope.sourceNode.connect($scope.volume);
+
+                      $scope.volume.connect(gainNode);
                       //console.log(buffer);
                       $scope.sourceNode.buffer = buffer;
                       $scope.sourceNode.loop = $scope.loop;
+                      //AudioBufferSourceNode.loopStart
+                      //$scope.sourceNode.loopStart = $scope.newoffset;
 
                       $scope.sourceNode.start(0, $scope.offset);
                       
@@ -272,7 +285,55 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                   //     $scope.$apply(function () {
                   // $scope.seekpos = $scope.getCurrentTime();
                   //   })
+
+                  //relative mousex maps to duration of the song
+
+                  //$scope.loopstart = $( "windowid" ).onmousemove(sendx());
+
+                  // $( "dragstart" ).mousemove(function( event ) {
+                  // var pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
+                  // var clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
+                  // console.log(pageCoords);
+                  // console.log(clientCoords);
+                  // console.log("10KKKKK");
+                  // // $( "span:first" ).text( "( event.pageX, event.pageY ) : " + pageCoords );
+                  // // $( "span:last" ).text( "( event.clientX, event.clientY ) : " + clientCoords );
+                  // });
+
+                //$scope.windowid.addEventListener("loopstart", function(){ setloopstart(); });
                   
+                  
+
+                  $scope.setloopstart = function(){
+                    // $scope.loopstart=document.getElementById("windowid");
+                    //var element1 = element;
+                    var element = document.getElementById($scope.loopstart);
+                    // var x = $scope.loopstart.offsetLeft; 
+                    // var y = $scope.loopstart.offsetTop;
+                    //console.log(element1);
+                    console.log("start: " + element.offsetLeft);
+                    //console.log(element.offsetLeft);
+
+                    //console.log($scope.windowid.offset());
+
+                  }
+
+                      $scope.setloopend = function(){
+                    // $scope.loopstart=document.getElementById("windowid");
+                    //var element1 = element;
+                    var element = document.getElementById($scope.loopend);
+                    // var x = $scope.loopstart.offsetLeft; 
+                    // var y = $scope.loopstart.offsetTop;
+                    //console.log(element1);
+                    console.log("end:" + element.offsetLeft);
+                    //console.log(element.offsetLeft);
+
+                    //console.log($scope.windowid.offset());
+
+                  }
+
+
+                
                   ////////////////////////
                   //updates the value of the player with the new value
                   $scope.setseek = function(val){
@@ -327,7 +388,8 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
                   $scope.setvolume = function(val){
                   //$scope.sourceNode.volume = val;
-                    gainNode.gain.value = val;
+                    $scope.volume.gain.value = val;
+                    //gainNode.gain.value = val;
                     borderval = val + 'px';
 
                   }
@@ -676,6 +738,7 @@ app.directive('dragMe', function() {
     }
   };
 });
+
 
 
 app.directive('ngMain2', function() {

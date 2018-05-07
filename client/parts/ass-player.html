@@ -35,19 +35,24 @@
 
 <div id="img{{containerid}}" class="imgcontainer" >
 	
-
-	
-
 	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false;" draggable="false"/>
 </div>
 
+
 <div id="{{containerid}}" class="dragcontainer" >
 
-	<div drag-me id="{{windowid}}" class="draggable ui-widget-content smalltext loopstart">
-	<div class="pointer"></div>
+	<div drag-me id="{{loopstart}}" ng-mouseup="setloopstart()" class="draggable ui-widget-content smalltext loopstart"> 
+
+		<div class="pointer" > </div>
 	</div>
-	<div drag-me id="{{windowid}}2" class="draggable ui-widget-content smalltext loopend">
-	<div class="pointer"></div>	</div>
+	<!-- <div drag-me id="{{windowid}}" ng-model="setloopstart" ng-change="setloopstart(loopstart)" class="draggable ui-widget-content smalltext loopstart">
+		<div class="pointer"></div>
+	</div> -->
+
+	<div drag-me id="{{loopend}}" ng-mouseup="setloopend()" class="draggable ui-widget-content smalltext loopend">
+		<div class="pointer"></div>	
+	</div>
+
 </div>
 
 <!-- <div id="draggable" class="ui-widget-content smalltext">
