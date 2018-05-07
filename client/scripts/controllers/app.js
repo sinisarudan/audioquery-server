@@ -181,7 +181,6 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           
           */
 
-          $scope.newoffset = 
 
 
           $scope.Sound = function(buffer){
@@ -191,10 +190,24 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
             $scope.pausedAt = 0;
             $scope.offset = 0;
             $scope.myVar = 0;
+
+            $scope.newloopstart = 0;
+            $scope.newloopend = buffer.duration;
             //$scope.playing = true;
             //console.log($scope.loop);
 
+            
 
+            
+
+            $scope.loopupdate = function(){
+              if ($scope.sourceNode){
+                
+                  $scope.sourceNode.loopStart = $scope.newloopstart;
+                  $scope.sourceNode.loopEnd = $scope.newloopend;
+                  console.log("loop updated");
+              }
+            }
             
             // $scope.loopStart = 0;
             // $scope.loopEnd = buffer.duration;
@@ -213,7 +226,13 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                       $scope.volume.connect(gainNode);
                       //console.log(buffer);
                       $scope.sourceNode.buffer = buffer;
+
                       $scope.sourceNode.loop = $scope.loop;
+
+                      // $scope.sourceNode.loop = $scope.loop;
+                      // $scope.sourceNode.loopStart = $scope.newloopstart;
+                      // $scope.sourceNode.loopEnd = $scope.newloopend;
+                  
                       //AudioBufferSourceNode.loopStart
                       //$scope.sourceNode.loopStart = $scope.newoffset;
 
@@ -305,30 +324,33 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                   
 
                   $scope.setloopstart = function(){
-                    // $scope.loopstart=document.getElementById("windowid");
-                    //var element1 = element;
-                    var element = document.getElementById($scope.loopstart);
-                    // var x = $scope.loopstart.offsetLeft; 
-                    // var y = $scope.loopstart.offsetTop;
-                    //console.log(element1);
-                    console.log("start: " + element.offsetLeft);
-                    //console.log(element.offsetLeft);
 
-                    //console.log($scope.windowid.offset());
+                    var element = document.getElementById($scope.loopstart);
+                    var boxwidth = angular.element(document.getElementById($scope.containerid))[0].clientWidth;
+                     console.log("pix start: " + element.offsetLeft);
+                    $scope.newloopstart = element.offsetLeft * $scope.sourceNode.buffer.duration / boxwidth;                   
+                    console.log("sample start: " +  $scope.newloopstart);
+                    $scope.loopupdate();
+                    // if ($scope.sourceNode){
+                    //   $scope.sourceNode.loopStart = $scope.newloopstart;
+                      
+                    // }
 
                   }
 
-                      $scope.setloopend = function(){
-                    // $scope.loopstart=document.getElementById("windowid");
-                    //var element1 = element;
+                    $scope.setloopend = function(){
+                    
                     var element = document.getElementById($scope.loopend);
-                    // var x = $scope.loopstart.offsetLeft; 
-                    // var y = $scope.loopstart.offsetTop;
-                    //console.log(element1);
-                    console.log("end:" + element.offsetLeft);
-                    //console.log(element.offsetLeft);
-
-                    //console.log($scope.windowid.offset());
+                    var boxwidth = angular.element(document.getElementById($scope.containerid))[0].clientWidth;
+                     console.log("pix end: " + element.offsetLeft);
+                    $scope.newloopend = element.offsetLeft * $scope.sourceNode.buffer.duration / boxwidth;                   
+                    console.log("sample end: " +  $scope.newloopend);
+                    $scope.loopupdate();
+                    // if ($scope.sourceNode){
+                    //   $scope.sourceNode.loopEnd = $scope.newloopend;
+                      
+                    // }
+                    
 
                   }
 
