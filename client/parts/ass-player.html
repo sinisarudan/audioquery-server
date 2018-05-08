@@ -10,7 +10,7 @@
 <a class="playbtn fa fa-stop" ng-class="" ng-click="stop()"></a>
 
 
-<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop}" ng-click="loop = !loop"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop}" ng-click="loop = !loop" ></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 <!-- <a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop.booleanValue}" ng-click="loop.booleanValue = !loop.booleanValue"></a>&nbsp;&nbsp;&nbsp;&nbsp; -->
 
@@ -26,7 +26,7 @@
 
 
 
-	<span class="smalltext audiodata">{{seekpos | sectime | date:'mm:ss'}} | {{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
+	<span class="smalltext audiodata">{{timenow}}{{seekpos | sectime | date:'mm:ss'}} | {{freesound.duration | sectime | date:'mm:ss'}} | {{freesound.name}} </span>
 
 <!-- 		<span class="smalltext audiodata">{{seekpos | sectime | date:'mm:ss'}} | {{conversion | sectime | date:'mm:ss'}} | {{freesound.name}} </span> -->
 
