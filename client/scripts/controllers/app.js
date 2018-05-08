@@ -47,9 +47,11 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.html5Mode(true);
     $routeProvider
-      .
-    when('/chat', {
+      .when('/chat', {
             templateUrl: 'parts/chat.html',
+            controller: 'queryController'
+        }).when('/connect', {
+            templateUrl: 'parts/connect.html',
             controller: 'queryController'
         }).otherwise({
         templateUrl: 'parts/list.html',
@@ -76,7 +78,7 @@ app.directive('ngMain', function() {
 });
 
 //custom player for audioquery
-app.directive ('assPlayer', ['$rootScope', function($rootScope){
+app.directive ('assPlayer', ['$rootScope', function($rootScope, $interval){
 
   return {
     restrict: 'E',
@@ -586,6 +588,13 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
               console.log("currentTime" + $scope.getCurrentTime());
             }
 
+        $scope.$watch('$scope.getCurrentTime()', function() {
+              console.log('hey, myVar has changed!');
+          });
+
+        $interval(function() {
+    console.log('ha');
+}, 1000);
             // $scope.$apply(function () {
             //   $scope.seekpos = $scope.getCurrentTime();
               

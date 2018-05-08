@@ -456,7 +456,7 @@ var WORKER_PATH = './scripts/controllers/recorderWorker.js';
 }]);
 
 
-app.controller('chatController', ['$scope', '$window', '$http', '$location', '$filter', '$sce',  function ($scope, $window, $http, $location, $filter, $sce ) {
+app.controller('chatController', ['$scope', '$window', '$http', '$location', '$filter', '$sce', '$interval',  function ($scope, $window, $http, $location, $filter, $sce, $interval ) {
 
 
 //new stuff
