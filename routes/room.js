@@ -2,14 +2,17 @@ var express = require('express');
 const path = require('path');
 var router = express.Router();
 
+var initialized = false;
 
 router.get('/*', (req, res, next) => {
 
-
+if (!initialized) {
 try {
+
 
     // res.io.emit("socketToMe", "room");
     var numUsers = 0;
+    initialized = true;
 
     res.io.on('connection', function (socket) {
       //var addedUser = false;
@@ -75,6 +78,7 @@ try {
     console.error(err);
     res.send("Error " + err);
   }
+};
 
 
   var dirfiles = ".." +"/client/index.html";
@@ -220,7 +224,7 @@ try {
   //   });
   // });
 
-  
+
 // });
 
 
