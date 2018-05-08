@@ -50,7 +50,7 @@ $scope.singlequery = function(soundid) {
       $scope.$apply(function () {
         $scope.response = response;
         $scope.sound = response.results;
-        
+
       });
       }, function(response) {
         // error.
@@ -514,10 +514,10 @@ setUsername();
   function addParticipantsMessage (data) {
     var message = ' Welcome, ';
     if (data.numUsers === 1) {
-      
+
       message += "there's 1 participant";
     } else {
-      
+
       message += "there are " + data.numUsers + " participants";
     }
     // log(message);
@@ -554,7 +554,7 @@ setUsername();
       addChatMessage({
         username: username,
         message: message
-      });
+      }, { prepend: true });
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', message);
     }
@@ -595,7 +595,7 @@ setUsername();
   function addChatTyping (data) {
     data.typing = true;
     data.message = 'is typing';
-    addChatMessage(data);
+    addChatMessage(data, { prepend: true });
   }
 
   // Removes the visual chat typing message
@@ -684,7 +684,7 @@ setUsername();
 
   $window.keydown(function (event) {
 
-    
+
     // Auto-focus the current input when a key is typed
     if (!(event.ctrlKey || event.metaKey || event.altKey)) {
       // $currentInput.focus();
@@ -733,7 +733,7 @@ setUsername();
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
-    addChatMessage(data);
+    addChatMessage(data, { prepend: true });
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
