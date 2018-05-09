@@ -1,0 +1,207 @@
+parameters:
+  host: "localhost"
+  ports: 
+    http: 8000
+    https: 8443
+    ws: 9000
+    wss: 9443
+  paths: 
+    query: "/query"
+    update: "/update"
+    subscribe: "/subscribe"
+    register: "/oauth/register"
+    tokenRequest: "/oauth/token"
+    securePath: "/secure"    
+
+namespaces:
+  qmul: "http://eecs.qmul.ac.uk/wot#"
+  
+updates:
+
+  TD_INIT:
+    sparql: "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+             PREFIX wot: <http://wot.arces.unibo.it/sepa#>
+             INSERT DATA {
+               ?thingURI rdf:type wot:Thing . 
+               ?thingURI wot:hasName ?thingName . 
+               ?thingURI wot:hasTD ?thingDescURI .
+               ?thingDescURI rdf:type wot:ThingDescription
+             }"
+    forcedBindings:
+      thingURI: "uri"
+      thingDesc: "uri"
+      thingName: "literal"
+      
+  TD_ADD_ACTION_SINGLE_STRING_INPUT:
+    sparql: "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+             PREFIX wot: <http://wot.arces.unibo.it/sepa#>
+             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+             INSERT DATA {
+               ?thingDesc wot:hasInteractionPattern ?actionURI .
+               ?actionURI rdf:type wot:Action .
+               ?actionURI wot:hasName ?actionName .
+               ?actionURI rdfs:comment ?actionComment .
+               ?actionURI wot:hasInputDataSchema ?actionDataSchema .
+               ?actionDataSchema rdf:type wot:FieldSchema .
+               ?actionDataSchema rdf:type xsd:String .               
+             }"
+    forcedBindings:
+      thingDesc: "uri"
+      actionURI: "uri"
+      actionName: "literal"
+      actionComment: "literal"
+      actionDataSchema: "uri"
+
+  TD_DELETE:
+    sparql: "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+             PREFIX wot: <http://wot.arces.unibo.it/sepa#>
+             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+             PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+             DELETE {
+               ?thingURI rdf:type wot:Thing .
+               ?thingURI wot:hasName ?thingName .
+               ?thingURI wot:hasTD ?thingDesc .
+               ?thingDesc wot:hasInteractionPattern ?actionURI .
+               ?thingDesc rdf:type wot:ThingDescription .
+               ?actionURI rdf:type wot:Action .
+               ?actionURI wot:hasName ?actionName .
+               ?actionURI rdfs:comment ?actionComment .
+               ?actionURI wot:hasInputDataSchema ?actionDataSchema .
+               ?actionDataSchema rdf:type wot:FieldSchema .
+               ?actionDataSchema rdf:type xsd:String .               
+               ?actionURI wot:hasInstance ?actionInstance .
+               ?actionInstance wot:hasInputData ?inputData .
+               ?inputData dul:hasDataValue ?dataValue      
+            } 
+            WHERE 
+            {
+              ?thingURI rdf:type wot:Thing .
+              ?thingURI wot:hasName ?thingName .
+              ?thingURI wot:hasTD ?thingDesc .
+              ?thingDesc wot:hasInteractionPattern ?actionURI .
+              ?thingDesc rdf:type wot:ThingDescription .
+              ?actionURI rdf:type wot:Action .
+              ?actionURI wot:hasName ?actionName .
+              ?actionURI rdfs:comment ?actionComment .
+              ?actionURI wot:hasInputDataSchema ?actionDataSchema .
+              ?actionDataSchema rdf:type wot:FieldSchema .
+              ?actionDataSchema rdf:type xsd:String .               
+              OPTIONAL {                    
+                ?actionURI wot:hasInstance ?actionInstance .
+                ?actionInstance wot:hasInputData ?inputData .
+                ?inputData dul:hasDataValue ?dataValue
+              }
+            }"
+    forcedBindings:
+      thingURI: "uri"
+
+  INSERT_SEARCH_REQUEST:
+    sparql: "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+             PREFIX wot: <http://wot.arces.unibo.it/sepa#> 
+             PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> 
+             INSERT { 
+               ?actionURI wot:hasInstance ?instance . 
+               ?instance wot:hasRequestTimeStamp ?request . 
+               ?instance rdf:type wot:ActionInstance .  
+               ?instance wot:hasInputData ?inputData . 
+               ?inputData dul:hasDataValue ?dataValue .
+               ?instance wot:hasOutputData ?outputData .
+               ?outputData dul:hasDataValue ?graphURI .
+               } 
+             WHERE {
+               ?actionURI rdf:type wot:Action . 
+               BIND(now() AS ?request) . 
+               BIND(IRI(CONCAT('wot:input_',STR(NOW()))) as ?inputData)               
+               BIND(IRI(CONCAT('wot:output_',STR(NOW()))) as ?outputData)               
+             }"
+    forcedBindings:
+      actionURI: "uri"
+      instance: "uri"
+      dataValue: "literal"
+      graphURI: "uri"
+
+  DELETE_SEARCH_REQUEST:
+    sparql: "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+             PREFIX wot: <http://wot.arces.unibo.it/sepa#> 
+             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+             PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> 
+             DELETE { 
+               ?actionURI wot:hasInstance ?instance . 
+               ?instance wot:hasRequestTimeStamp ?request . 
+               ?instance rdf:type wot:ActionInstance .  
+               ?instance wot:hasInputData ?inputData . 
+               ?inputData dul:hasDataValue ?dataValue .
+               ?instance wot:hasOutputData ?outputData .
+               ?outputData dul:hasDataValue ?graphURI .
+               GRAPH ?graphURI { ?s ?p ?o }
+             } 
+             WHERE {
+               ?actionURI wot:hasInstance ?instance . 
+               ?instance wot:hasRequestTimeStamp ?request . 
+               ?instance rdf:type wot:ActionInstance .  
+               ?instance wot:hasInputData ?inputData . 
+               ?inputData dul:hasDataValue ?dataValue .
+               ?instance wot:hasOutputData ?outputData .
+               ?outputData dul:hasDataValue ?graphURI .
+               GRAPH ?graphURI { ?s ?p ?o }
+             }"
+    forcedBindings:
+      instance: "uri"
+
+queries:
+
+  ACTION_REQUESTS:
+    sparql: "PREFIX wot: <http://wot.arces.unibo.it/sepa#>
+             PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+             SELECT ?actionInstance ?dataValue
+             WHERE {
+               ?thingURI wot:hasTD ?thingDescURI .
+               ?thingDescURI wot:hasInteractionPattern ?actionURI .
+               ?actionURI wot:hasInstance ?actionInstance .
+               ?actionInstance wot:hasInputData ?inputData .
+               ?inputData dul:hasDataValue ?dataValue
+             }"
+    forcedBindings:
+      thingURI: "uri"
+      actionURI: "uri"
+      thingDescURI: "uri"
+
+  ACTION_RESULTS:
+    sparql: "PREFIX wot: <http://wot.arces.unibo.it/sepa#>
+             PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+             PREFIX dc: <http://purl.org/dc/elements/1.1>
+             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+             PREFIX ac: <http://audiocommons.org/ns/audiocommons#>            
+             SELECT ?timestamp ?audioClip ?audioFile ?title
+             WHERE {
+               ?instance wot:hasOutputData ?outputData .
+               ?instance wot:hasCompletionTimestamp ?timestamp .
+               ?outputData dul:hasDataValue ?graph .
+               GRAPH ?graph {
+                 ?audioFile rdf:type ac:AudioFile .
+                 ?audioClip rdf:type ac:AudioClip .
+                 ?audioClip dc:title ?title .
+                 ?audioClip ac:available_as ?audioFile
+               }            
+             }"
+    forcedBindings:
+      graph: "uri"
+      instance: "uri"
+
+  ACTION_COMPLETION:
+    sparql: "PREFIX wot: <http://wot.arces.unibo.it/sepa#>
+             PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+             PREFIX dc: <http://purl.org/dc/elements/1.1>
+             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+             PREFIX ac: <http://audiocommons.org/ns/audiocommons#>            
+             SELECT ?timestamp
+             WHERE {
+               ?instance wot:hasOutputData ?outputData .
+               ?instance wot:hasCompletionTimestamp ?timestamp .
+               ?outputData dul:hasDataValue ?graph .
+             }"
+    forcedBindings:
+      graph: "uri"
+      instance: "uri"

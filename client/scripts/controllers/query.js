@@ -58,7 +58,6 @@ $scope.singlequery = function(soundid) {
         //ok
       }, function(response) {
         // error.
-
       });
 
 }
@@ -176,6 +175,56 @@ if (queryString) {
 $scope.player = function(itemid) {
   var playerid = playersCounter++;
 
+
+    //adding to sounds
+    console.log("ADDING ");
+    console.log(itemid);
+    console.log($scope.sounds);
+    console.log($scope);
+
+    for (el in $scope.results){
+	if ($scope.results[el]["id"] === itemid){
+
+	    // $.post("/semantic",
+	    // 	   {"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"]},
+	    // 	   function(data){
+	    // 	       console.log("RECEIVED DATA:");
+	    // 	       console.log(data)
+	    // 	   }
+	    // 	  );
+	    
+	    $.ajax({
+		url: '/semantic',
+		dataType: 'json',
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify({"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"]}),
+		processData: false,
+		success: function( data, textStatus, jQxhr ){
+		    console.log(data);
+		    textField = document.getElementById("recommendations");
+		    textField.innerHTML = "";
+		    for (r in data){
+			console.log(r)
+			textField.innerHTML += data[r]["title"];
+		    }
+		    console.log("End");
+		},
+		error: function( jqXhr, textStatus, errorThrown ){
+		    console.log( errorThrown );
+		}
+	    });
+	    
+	    // for (tag in $scope.results[el]["tags"]){
+
+	    // 	// t = $scope.results[el]["tags"][tag];
+	    // 	// updText = `PREFIX ns:<http://ns#> INSERT DATA \{ <${$scope.sessionID}> ns:hasTag "${t}" \}`
+	    // 	// console.log(updText);
+	    // }
+	}
+    }
+
+    
   //adding to sounds
   $scope.sounds.unshift({id: itemid, newsound: 1, playerid: playerid});
 

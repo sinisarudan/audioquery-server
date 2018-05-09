@@ -10,6 +10,7 @@ var index = require('./routes/index');
 
 
 var freesoundApiRouter = require('./routes/freesound');
+var semantic = require('./routes/semantic');
 var users = require('./routes/users');
 var rooms = require('./routes/room');
 
@@ -40,6 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/freesound', freesoundApiRouter);
+app.use('/semantic', semantic);
 app.use('/users', users);
 // app.use('/chat/room', rooms);
 app.use('/chat', rooms);
