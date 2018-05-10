@@ -625,11 +625,20 @@ setUsername();
       $typingMessages.remove();
     }
 
-    var $usernameDiv = $('<span class="username"/>')
+   var $usernameDiv = $('<span class="username"/>')
       .text(data.username)
       .css('color', getUsernameColor(data.username));
-    var $messageBodyDiv = $('<span class="messageBody">')
-      .text(data.message);
+    var $messageBodyDiv = $('<span class="messageBody">');
+      // .text(data.message);
+
+    var words = data.message.split(' ');
+    for (var i = 0; i < words.length; i++) {
+      var $wordDiv = $('<span/>').text(words[i] + " ");
+      $messageBodyDiv.append($wordDiv);
+      $messageBodyDiv.append($());
+    };
+
+      
 
     var typingClass = data.typing ? 'typing' : '';
     var $messageDiv = $('<li class="message"/>')
@@ -638,6 +647,14 @@ setUsername();
       .append($usernameDiv, $messageBodyDiv);
 
     addMessageElement($messageDiv, options);
+    $('.messageBody span').click(function(){
+          $('#mainsearch').val(this.textContent);
+          $('#mainsearch').change();
+
+
+        //$scope.query = this.textContent;
+        console.log(this.textContent);
+      });    
   }
 
   // Adds the visual chat typing message
