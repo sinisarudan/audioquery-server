@@ -18,7 +18,7 @@
 
 
 <p class="smalltext volctr">
-	<input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="vol-{{audiodata.playerid}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span>vol: {{soundvolume | number: 2}} </span> </p>
+	<input type="range" min="0" value="{{soundvolume}}" max="1" step="any" id="vol-{{audiodata.playerid}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span>vol: {{soundvolume | number: 2}} </span> </p>
 
 <p class="smalltext speedctr">
 	<input type="range" min="0.1" value="1.0" max="3.3" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span> Xtime: {{soundspeed | number: 2}} </span>  </p>
@@ -37,7 +37,11 @@
 
 <div></div>
 
-<div id="img{{containerid}}" class="imgcontainer" >
+
+<div id="img{{containerid}}" class="imgcontainer" ng-click="getmousex($event)" >
+
+
+<!-- <div ng-click="addOnClick($event)"></div> -->
 	
 	<img class="smallimg" id="img{{freesound.id}}" ng-src="{{freesound.images['spectral_m']}}" style="opacity:{{soundvolume / 2 + 0.5}};z-index:1" ondragstart="return false;" draggable="false"/>
 </div>
@@ -45,8 +49,10 @@
 
 <div id="{{containerid}}" class="dragcontainer" >
 
-	<div drag-me id="{{loopstart}}" ng-mouseup="setloopstart()" class="draggable ui-widget-content smalltext loopstart"> 
 
+
+	<div drag-me id="{{loopstart}}" ng-mouseup="setloopstart()" class="draggable ui-widget-content smalltext loopstart"> 
+<!-- 		<div ng-click="addOnClick($event)"></div> -->
 		<div class="pointer" > </div>
 	</div>
 	<!-- <div drag-me id="{{windowid}}" ng-model="setloopstart" ng-change="setloopstart(loopstart)" class="draggable ui-widget-content smalltext loopstart">
