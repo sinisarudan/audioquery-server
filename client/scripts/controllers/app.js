@@ -273,17 +273,17 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                      
 
                       $scope.offset = $scope.seekpos;
-                       console.log($scope.offset + "check offset" );
+                       //console.log($scope.offset + "check offset" );
 
                       $scope.startedAt = audioCtx.currentTime - $scope.offset;
-                       console.log($scope.startedAt + "started at" );
+                       //console.log($scope.startedAt + "started at" );
 
                       // $scope.offset = $scope.startedAt;
                      
 
                       $scope.timetoend = $scope.newloopend - $scope.offset; 
 
-                      console.log($scope.timetoend + "check timeto" );
+                      //console.log($scope.timetoend + "check timeto" );
                       //when the seek cursor is moved, the offset should be updated
 
                       // if ($scope.newloopstart>0){
@@ -391,7 +391,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
 
                       //console.log(elapsed + "elapsed");
 
-                      console.log ($scope.startedAt + "startedAt");
+                      //console.log ($scope.startedAt + "startedAt");
                       $scope.onpause();
                       $scope.stop();
                       $scope.playing = false;
@@ -448,7 +448,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                           // }
 
                           return audioCtx.currentTime - $scope.startedAt;
-                          console.log("started");
+                          //console.log("started");
 
                           //return audioCtx.currentTime - $scope.startedAt - $scope.newloopstart;
                       }
@@ -764,7 +764,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                     $scope.seekpos = $scope.getCurrentTime();
                     // $scope.updateSeek();
                     });
-                  console.log($scope.getCurrentTime() + "currentTime");
+                  //console.log($scope.getCurrentTime() + "currentTime");
               }else if ($scope.seekpos >= $scope.newloopend && !$scope.loop){
 
                 $scope.stop();
@@ -772,78 +772,54 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                 $scope.$apply(function () {
                 //$scope.seekpos = $scope.newloopstart;
                   console.log("do something");
-                  //$scope.seekpos = $scope.newloopend;
-                  // $scope.updateSeek();
+
                 });
               }
 
           }else{
+
+            if ($scope.newloopstart >= $scope.newloopend){
             //console.log("no sourceNode");
-            $scope.$apply(function () {
-                //$scope.seekpos = $scope.newloopstart;
-                  
-                  //$scope.seekpos = $scope.getCurrentTime();
-                  //console.log($scope.seekpos + "seekpos after no source node");
-                  //$scope.seekpos = $scope.newloopend;
-                  // $scope.updateSeek();
+              $scope.$apply(function () {
+
+                $('.loopstart').css('position', 'absolute');
+                $('.loopstart').css('left', 0); //or wherever you want it
+
+                $scope.newloopstart = 0;
+                $scope.seekpos = 0;
+ 
                 });
+            }
           }
-                      //console.log('hi' + $scope.timenow);
+                      
         }, 10);
 
         }
 
 
 
-
-          // $scope.seekpos = $scope.$watch('currentTime', function(newValue, oldValue) {
-
-          //             //console.log(newValue);
-
-          //             return $scope.currentTime
-
-          //   }, true);
-
-
-          // $scope.$watch('elapsed', function() {
-          //     //alert('hey, myVar has changed!');
-          //     $scope.seekpos = $scope.elapsed;
-          // });
-
-
         $scope.conversion  = $scope.freesound.duration;
 
 
         $scope.getmousex = function(e){
-          //console.log("hey");
 
-          //var element = document.getElementById($scope.loopend);
-
-          //var boxwidth = angular.element(document.getElementById($scope.containerid))[0].clientWidth;
-                     //console.log("pix end: " + element.offsetLeft);
-                        
                                   
         var cont = document.getElementById("img" + $scope.containerid);
 
-        $scope.seekpos = (e.pageX - cont.offsetLeft);
+        // $scope.pause();
 
-          console.log("seek: " +  $scope.seekpos);
+        // $scope.offset = (e.pageX - cont.offsetLeft);
+
+        // $scope.cursor();
+
+        // £scope.play();
+
+        //$scope.seekpos = (e.pageX - cont.offsetLeft);
+
+          //console.log("seek: " +  $scope.seekpos);
 
        
         }
-
-        // $scope.conversion =  function() {
-
-        //   var stretched = $scope.freesound.duration;
-
-        //   //var stretched = $scope.freesound.duration / $scope.setspeed
-        //   console.log(stretched);
-
-        //   return stretched;
-        // }
-
-      //$scope.updateSeek();
-        
 
 
 
