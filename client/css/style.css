@@ -184,6 +184,10 @@ right: 0;
     display: block;
 }
 
+.infos {
+  color: #fff;
+}
+
 .smalltext {
         font-size: 10px;
 
@@ -599,7 +603,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 #audios {
-    background-color: #fff;
+    background-color: #000;
     margin-top: 0px;
     padding-left: 5px;
     height: 100%;
