@@ -84,27 +84,46 @@ section {
 }
 
 .draggable { 
-/*    border: 1px solid white;
-    width: 150px; 
-    height: 150px; 
-    padding: 0.5em;
-    color : white;*/
-
-    /*border: 1px solid white;*/
     height: 100%;
-    /*width: 90px;*/
-    width: 10%;
-    /*padding: 0.5em;*/
+    width: 10px;
     background-color: red;
-    z-index: 1000;
-
+    z-index: 30;
 
      }
 
+
+.loopstart {
+  position: absolute;
+  line-height: 60px;
+  overflow: visible;
+}
+
+.loopend {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  overflow: visible;
+}
+
+.draggable .pointer {
+  height: 65px;
+  width: 1px;
+  background-color: #fff;
+  position: absolute;
+  top:-50px;
+}
+
+.loopend .pointer {
+position: absolute;
+right: 0;
+}
+
 .dragcontainer{
-    border: 0.5px solid red;
-    height: 10px;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+    height: 15px;
     width: 100%; 
+    position: relative;
 }
 
 .smallimg {
@@ -191,6 +210,12 @@ section {
     overflow: scroll;
 }
 
+#ch #list {
+   width: calc(100% - 500px);
+    height: 100%;
+    overflow: scroll;
+}
+
 #playlist {
     width: 220px;
     background-color: #fff;
@@ -198,7 +223,6 @@ section {
 }
 
 .players {
-    outline: 1px solid black;
 }
 
 .audioplayer {
@@ -240,6 +264,8 @@ section {
 .menu {
     width: 100%;
     position: relative;
+    margin-left: 5px;
+    z-index: 100px;
 }
 
 
@@ -295,6 +321,7 @@ margin-bottom: 5px;
  width: 195px; 
  outline: 1px solid black; 
 }
+
 
 
 
@@ -559,11 +586,23 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* player */
 
+
+#chat {
+  width: 200px;
+  padding-top: 5px;
+    overflow: hidden;
+    float: left;
+    margin: 0;
+    position: relative;
+    background-color: #fff;
+}
+
+
 #audios {
     background-color: #fff;
     margin-top: 0px;
     padding-left: 5px;
-    height: calc(100% - 50px);
+    height: 100%;
     overflow: scroll;
     /*display: flex;
     flex-direction: column-reverse;*/
@@ -734,16 +773,52 @@ z-index: 1;
         overflow: auto;
     }
 
+    .busca {
+      width: 100%;
+    }
+
+
+    .fa {
+      font-size: 25px;
+      margin-right: 5px;
+    }
+
+    .player {
+      width: 100%;
+    }
+
     #playlist {
         width: 50%;
+        background-color: #000;
     }
 
     audio {
         width: 100%;
     }
 
+    #audios {
+      padding-left: 0;
+      background-color: #000;
+    }
+
     #list {
         width: 50%;
+    }
+
+    #ch {
+      width: 300%;
+    }
+
+    #ch #chat {
+      width: 30%;
+    }
+
+    #ch  #list {
+        width: 30%;
+    }
+
+    #ch #playlist {
+      width: 30%;
     }
 
 .result {
@@ -766,6 +841,84 @@ z-index: 1;
     .info {
         height: auto;
     }
+
+    input[type=range] {
+  -webkit-appearance: none;
+  margin: 12px 0;
+  z-index: 10;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2pt;
+  cursor: pointer;
+  background: #fff;
+  border: 0pt solid #fff;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #ff0000;
+  height: 25px;
+  width: 15px;
+  background: #ff0000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #fff;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #000000;
+  border: 1px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  border: 1px solid #ff0000;
+  height: 25px;
+  width: 15px;
+  background: #ff0000;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #000000;
+  border: 1px solid #010101;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-fill-upper {
+  background: #000000;
+  border: 1px solid #010101;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-thumb {
+  border: 1px solid #ff0000;
+  height: 25px;
+  width: 15px;
+  border-radius: 0px;
+  background: #ff0000;
+  cursor: pointer;
+  height: 4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #000000;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #0d0d0d;
+}
+
+
+
 }
 
 /* recorder */
@@ -778,6 +931,158 @@ z-index: 1;
 
 #sources {
     font-size: 6pt;
+}
+
+/*chat*/
+
+/* Fix user-agent */
+
+/** {
+  box-sizing: border-box;
+}*/
+
+/*html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}*/
+
+/*html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}*/
+
+/*html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}*/
+
+/*ul {
+  list-style: none;
+  word-wrap: break-word;
+}*/
+
+/* Pages */
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Login Page */
+
+.login.page {
+  background-color: #fff;
+}
+
+.login.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.login.page .form .usernameInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: left;
+  width: 400px;
+}
+
+.login.page .title {
+  font-size: 200%;
+}
+
+.login.page .usernameInput {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+
+.login.page .title, .login.page .usernameInput {
+  color: #000;
+  font-weight: 100;
+}
+
+/* Chat page */
+
+.chat.page {
+  display: none;
+}
+
+/* Font */
+
+.messages {
+  font-size: 150%;
+}
+
+.inputMessage {
+  font-size: 100%;
+}
+
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
+}
+
+/* Messages */
+
+.chatArea {
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
+}
+
+.message.typing .messageBody {
+  color: gray;
+}
+
+.username {
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
+}
+
+/* Input */
+
+.inputMessage {
+  border: 10px solid #000;
+  top: 0;
+  height: 60px;
+  left: 0;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
 }
 
 

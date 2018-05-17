@@ -51,7 +51,7 @@ router.all(freesoundInternalPrefix, (req, resp, next) => {
 router.get('/*', (req, resp, next) => {
   var dirfiles = ".." +"/client/index.html";
 
-  resp.sendfile( path.join(__dirname, dirfiles)); // updated to reflect dir structure
+  resp.sendFile( path.join(__dirname, dirfiles)); // updated to reflect dir structure
 });
 
 module.exports = router;
