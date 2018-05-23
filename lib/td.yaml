@@ -1,10 +1,10 @@
 parameters:
-  host: "localhost"
+  host: "wot.arces.unibo.it"
   ports: 
-    http: 8000
-    https: 8443
-    ws: 9000
-    wss: 9443
+    http: 8027
+    https: 8447
+    ws: 9027
+    wss: 9447
   paths: 
     query: "/query"
     update: "/update"
@@ -171,19 +171,22 @@ queries:
   ACTION_RESULTS:
     sparql: "PREFIX wot: <http://wot.arces.unibo.it/sepa#>
              PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
-             PREFIX dc: <http://purl.org/dc/elements/1.1>
+             PREFIX dc: <http://purl.org/dc/elements/1.1/>
              PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
              PREFIX ac: <http://audiocommons.org/ns/audiocommons#>            
+             PREFIX rec: <http://purl.org/ontology/rec/core#>
              SELECT ?timestamp ?audioClip ?audioFile ?title
              WHERE {
                ?instance wot:hasOutputData ?outputData .
                ?instance wot:hasCompletionTimestamp ?timestamp .
                ?outputData dul:hasDataValue ?graph .
                GRAPH ?graph {
-                 ?audioFile rdf:type ac:AudioFile .
+                 ?rec rdf:type rec:Recommendation .
                  ?audioClip rdf:type ac:AudioClip .
+                 ?audioClip rec:recommended_in ?rec .                 
                  ?audioClip dc:title ?title .
-                 ?audioClip ac:available_as ?audioFile
+                 ?audioClip ac:available_as ?audioFile .
+                 ?audioFile rdf:type ac:AudioFile .                 
                }            
              }"
     forcedBindings:

@@ -19,7 +19,7 @@ $scope.about= 'estreito';
 
 $scope.$watch('query', function() {
   // console.log("making query");
-  $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
+  $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,url,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
   //$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
 });
@@ -181,34 +181,31 @@ $scope.player = function(itemid) {
     console.log(itemid);
     console.log($scope.sounds);
     console.log($scope);
-
+    
+    tags = ""    
     for (el in $scope.results){
 	if ($scope.results[el]["id"] === itemid){
 
-	    // $.post("/semantic",
-	    // 	   {"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"]},
-	    // 	   function(data){
-	    // 	       console.log("RECEIVED DATA:");
-	    // 	       console.log(data)
-	    // 	   }
-	    // 	  );
-	    
+	    console.log("TROVATO")
+	    console.log($scope.results[el])
+	    	    
 	    $.ajax({
 		url: '/semantic',
 		dataType: 'json',
 		type: 'post',
 		contentType: 'application/json',
-		data: JSON.stringify({"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"]}),
+		data: JSON.stringify({"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"], "details": $scope.results[el] }),
 		processData: false,
 		success: function( data, textStatus, jQxhr ){
 		    console.log(data);
 		    textField = document.getElementById("recommendations");
-		    textField.innerHTML = "";
+		    textField.innerHTML = "<ul>";
 		    for (r in data){
 			console.log(r)
-			textField.innerHTML += data[r]["title"];
+			textField.innerHTML += "<li>" + data[r]["title"] + "</li>";
 		    }
 		    console.log("End");
+		    textField.innerHTML += "</ul>"
 		},
 		error: function( jqXhr, textStatus, errorThrown ){
 		    console.log( errorThrown );

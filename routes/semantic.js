@@ -19,6 +19,7 @@ router.all('*', (req, resp, next) => {
 
     // debug print
     console.log("Invoked Semantic processor");
+    console.log(req.body)
 
     // generate a random request number
     reqid = uuidv4();
@@ -43,7 +44,7 @@ router.all('*', (req, resp, next) => {
 
     	    // check if it's a confirmation message
     	    if (data.includes("subscribed"))
-    		console.log("Recommendation Subscription confirmed");
+    		console.log("Recommendation Subscription confirmed for " + actionInstance);
 	    
     	    // if it's a real notification
     	    else {
@@ -63,7 +64,7 @@ router.all('*', (req, resp, next) => {
 		resp.writeHead("200", {'Content-Type':'text/plain'});
 		resp.write(JSON.stringify(outres));
 		resp.end();
-
+		
     		// close the subscription and delete request and response
     		fb = { "instance": actionInstance }
     		updText = td.getUpdate("DELETE_SEARCH_REQUEST", fb);
