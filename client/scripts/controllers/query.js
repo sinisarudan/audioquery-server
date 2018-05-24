@@ -207,7 +207,7 @@ $scope.player = function(itemid) {
 		    if (data.length > 0){
 			textField.innerHTML = "<ul>";
 			for (r in data){			
-			    textField.innerHTML += "<li><a href=" + data[r]["url"] + " target='1' >" + data[r]["title"] + "</a></li>";
+			    textField.innerHTML += "<li class='info'><a href=" + data[r]["url"] + " target='1' > <img class='smallimg' src='css/img/spec.jpg'/>" + data[r]["title"] + "</a></li>";
 			}			
 			textField.innerHTML += "</ul>"
 		    } else {
