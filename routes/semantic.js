@@ -19,7 +19,6 @@ router.all('*', (req, resp, next) => {
 
     // debug print
     console.log("Invoked Semantic processor");
-    console.log(req.body)
 
     // generate a random request number
     reqid = uuidv4();
