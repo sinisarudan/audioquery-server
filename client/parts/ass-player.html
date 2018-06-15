@@ -20,6 +20,10 @@
 <p class="smalltext volctr">
 	<input type="range" min="0" value="{{sound.volume}}" max="1" step="any" id="vol-{{audiodata.playerid}}" ng-model="soundvolume" ng-change="setvolume(soundvolume)"></input> <span class="infotxt">vol: {{soundvolume | number: 2}} </span> </p>
 
+<p class="smalltext panner">
+	<input type="range" min="-1" value="{{soundpan}}" max="1" step="any" id="pan-{{audiodata.playerid}}" ng-model="soundpan" ng-change="setpan(soundpan)"></input> <span class="infotxt">pan: {{soundpan | number: 2}} </span> </p>
+
+
 
 <p class="smalltext speedctr chrome">
 	<input type="range" min="0.1" value="1" max="4" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span class="infotxt"> Xtime: {{soundspeed | number: 2}} </span>  </p>

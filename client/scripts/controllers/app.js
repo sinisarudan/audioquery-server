@@ -153,6 +153,8 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
           $scope.newloopend = $scope.freesound.duration;
 
           $scope.soundvolume = 0.5;
+          $scope.soundpan = 0;
+
           $scope.soundspeed = 1;     
           $scope.pitchshifting = false;
           
@@ -187,9 +189,21 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
             $scope.play =  function() {
 
               $scope.sourceNode = audioCtx.createBufferSource();
+
+              // $scope.volume = audioCtx.createGain();
+              // $scope.sourceNode.connect($scope.volume);
+
+              // $scope.volume.connect(gainNode);
+              
+              $scope.panNode = audioCtx.createStereoPanner();
+              $scope.sourceNode.connect($scope.panNode);
+
               $scope.volume = audioCtx.createGain();
-              $scope.sourceNode.connect($scope.volume);
+              $scope.panNode.connect($scope.volume);
+              
               $scope.volume.connect(gainNode);
+
+
               //console.log(buffer);
               $scope.sourceNode.buffer = buffer;
               $scope.sourceNode.loop = $scope.loop;
@@ -445,6 +459,26 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
                     borderval = val + 'px';
 
                   }
+
+                    $scope.setpan = function(val){
+                  //$scope.sourceNode.volume = val;
+                   if ($scope.sourceNode){
+                    $scope.panNode.pan.value = val;
+                    console.log(val)
+                    }
+                    else {
+                      //$scope.playpause();
+                      $scope.soundpan = val;
+                    }
+                    
+                    //gainNode.gain.value = val;
+                    borderval = val + 'px';
+
+                  }
+
+                    
+              // $scope.pan = $scope.panNode.pan.setValueAtTime(panControl.value, audioCtx.currentTime);
+              
 
                   $scope.setspeed = function(val){
                     if ($scope.sourceNode){
