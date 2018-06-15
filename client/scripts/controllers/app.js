@@ -637,7 +637,7 @@ app.directive ('assPlayer', ['$rootScope', function($rootScope){
             }
           }
                       
-        }, 10);
+        }, 1);
 
         }
 
