@@ -19,7 +19,7 @@ $scope.about= 'estreito';
 
 $scope.$watch('query', function() {
   // console.log("making query");
-  $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
+  $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,url,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
   //$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
 });
@@ -175,52 +175,53 @@ if (queryString) {
 $scope.player = function(itemid) {
   var playerid = playersCounter++;
 
-
-    //adding to sounds
-    console.log("ADDING ");
-    console.log(itemid);
-    console.log($scope.sounds);
-    console.log($scope);
-
+    console.log("$scope.player invoked! Item: " + itemid);
+    console.log(playerid)
     for (el in $scope.results){
 	if ($scope.results[el]["id"] === itemid){
 
-	    // $.post("/semantic",
-	    // 	   {"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"]},
-	    // 	   function(data){
-	    // 	       console.log("RECEIVED DATA:");
-	    // 	       console.log(data)
-	    // 	   }
-	    // 	  );
+	    // debug
+	    console.log("Element found! Requesting recommendations...")
+	    console.log($scope.results[el])
 	    
+ 	    // update the title
+	    h1 = document.getElementById("connections-title");
+	    h1.innerHTML = "<b>Recommendations for audio file: " + $scope.results[el]["name"] + "</b>"	    
+
+	    // empty the previous list
+	    textField = document.getElementById("recommendations");
+	    textField.innerHTML = "<i>...processing!</i>";
+
+	    // request recommendation!
 	    $.ajax({
 		url: '/semantic',
 		dataType: 'json',
 		type: 'post',
 		contentType: 'application/json',
-		data: JSON.stringify({"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"]}),
+		data: JSON.stringify({"sessionID": $scope.sessionID, "tags": $scope.results[el]["tags"], "audioUri": $scope.results[el]["previews"]["preview-lq-ogg"], "audioClip": $scope.results[el]["url"], "name": $scope.results[el]["name"] }),		
 		processData: false,
 		success: function( data, textStatus, jQxhr ){
 		    console.log(data);
-		    textField = document.getElementById("recommendations");
-		    textField.innerHTML = "";
-		    for (r in data){
-			console.log(r)
-			textField.innerHTML += data[r]["title"];
+		    
+		    // write recommendations, if any
+		    if (data.length > 0){
+			textField.innerHTML = "<ul>";
+			for (r in data){			
+			    textField.innerHTML += "<li class='info'><a href=" + data[r]["url"] + " target='1' > <img class='smallimg' src='css/img/spec.jpg'/>" + data[r]["title"] + "</a></li>";
+			}			
+			textField.innerHTML += "</ul>"
+		    } else {
+			textField.innerHTML = "None, sorry!";
 		    }
-		    console.log("End");
 		},
 		error: function( jqXhr, textStatus, errorThrown ){
 		    console.log( errorThrown );
+		    textField.innerHTML = "<i>Request failed!</i>";
 		}
 	    });
-	    
-	    // for (tag in $scope.results[el]["tags"]){
 
-	    // 	// t = $scope.results[el]["tags"][tag];
-	    // 	// updText = `PREFIX ns:<http://ns#> INSERT DATA \{ <${$scope.sessionID}> ns:hasTag "${t}" \}`
-	    // 	// console.log(updText);
-	    // }
+	    break;
+
 	}
     }
 
@@ -552,7 +553,6 @@ app.controller('chatController', ['$scope', '$window', '$http', '$location', '$f
 //   //$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
 // });
-
 
 ////CHAT
 

@@ -1,20 +1,24 @@
-<div class="player" id="sound{{''+audiodata.playerid}}" ng-switch on="audiodata.newsound">
+<div class="player" id="sound{{''+audiodata.playerid}}" ng-switch on="audiodata.newsound"  title="player">
 
 
 
 <!--<input class="loopbtn" type="checkbox" ng-model="loop">-->
-<a class="removebtn fa fa-times" ng-class="" ng-click="removethis()"></a>
+<a class="removebtn fa fa-times" ng-class="" ng-click="removethis()" title="remove"></a>
 
-<a class="playbtn fa fa-play" ng-click="playpause()" ng-hide="playing" ng-class="" ></a>
-<a class="playbtn fa fa-pause" ng-click="playpause()" ng-hide="!playing" ng-class="" ></a>
-<a class="playbtn fa fa-stop" ng-class="" ng-click="stop()"></a>
+<a class="playbtn fa fa-play" ng-click="playpause()" ng-hide="playing" ng-class="" title="play"></a>
+<a class="playbtn fa fa-pause" ng-click="playpause()" ng-hide="!playing" ng-class="" title="pause"></a>
+<a class="playbtn fa fa-stop" ng-class="" ng-click="stop()" title="stop"></a>
 
 
+<<<<<<< HEAD
 <a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop}" ng-click="loop = !loop" ></a>&nbsp;&nbsp;&nbsp;&nbsp;
+=======
+<a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop}" ng-click="loop = !loop" title="loop"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+>>>>>>> refs/remotes/origin/recommendations
 
 <!-- <a class="loopbtn fa fa-rotate-right" ng-class="{'disabled': loop.booleanValue}" ng-click="loop.booleanValue = !loop.booleanValue"></a>&nbsp;&nbsp;&nbsp;&nbsp; -->
 
-<a class="fa fa-download download" href="{{freesound.url}}" target="_new" alt="open on freesound"></a>
+<a class="fa fa-download download" href="{{freesound.url}}" target="_new" title="open on freesound" ></a>
 
 
 <p class="smalltext volctr">
@@ -22,6 +26,7 @@
 
 <p class="smalltext speedctr">
 	<input type="range" min="0.1" value="1.0" max="3.3" step="any" id="speed-{{audiodata.playerid}}" ng-model="soundspeed" ng-change="setspeed(soundspeed)"></input><span> Xtime: {{soundspeed | number: 2}} </span>  </p>
+
 
 
 
