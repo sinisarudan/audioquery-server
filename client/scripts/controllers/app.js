@@ -53,6 +53,9 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
         }).when('/connect', {
             templateUrl: 'parts/connect.html',
             controller: 'queryController'
+        }).when('/space', {
+            templateUrl: 'parts/spat.html',
+            controller: 'queryController'
         }).otherwise({
         templateUrl: 'parts/list.html',
             controller: 'queryController'

@@ -513,6 +513,10 @@ var WORKER_PATH = './scripts/controllers/recorderWorker.js';
 
 }]);
 
+app.controller('canvasController', ['$scope', '$window', '$http', '$location', '$filter', '$sce', '$interval',  function ($scope, $window, $http, $location, $filter, $sce, $interval ) {
+
+
+}]);
 
 app.controller('chatController', ['$scope', '$window', '$http', '$location', '$filter', '$sce', '$interval',  function ($scope, $window, $http, $location, $filter, $sce, $interval ) {
 

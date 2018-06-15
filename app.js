@@ -13,6 +13,7 @@ var freesoundApiRouter = require('./routes/freesound');
 var semantic = require('./routes/semantic');
 var users = require('./routes/users');
 var rooms = require('./routes/room');
+var spatial = require('./routes/spatial');
 
 var app = express();
 var server = require('http').Server(app);
@@ -45,6 +46,7 @@ app.use('/semantic', semantic);
 app.use('/users', users);
 // app.use('/chat/room', rooms);
 app.use('/chat', rooms);
+app.use('/space', spatial);
 app.use('/', index);
 
 app.get('/fs', () => console.log('fs'));
