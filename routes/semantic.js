@@ -40,7 +40,7 @@ router.all('*', (req, resp, next) => {
     		"instance": actionInstance };
     console.log(td.getQuery("ACTION_RESULTS", fb));
     var ws4 = kp.doSubscribe(td.getQuery("ACTION_RESULTS", fb), function (data) {
-
+	console.log(data)
     	// ignore ping messages
     	if (!(data.includes("ping"))){
 
