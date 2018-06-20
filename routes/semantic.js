@@ -36,6 +36,7 @@ router.all('*', (req, resp, next) => {
     // subscribe to action results before invoking the action
     var fb =  {	"graph": outputGraph,
     		"instance": actionInstance };
+    console.log(td.getQuery("ACTION_RESULTS", fb));
     var ws4 = kp.doSubscribe(td.getQuery("ACTION_RESULTS", fb), function (data) {
 
     	// ignore ping messages
@@ -50,13 +51,13 @@ router.all('*', (req, resp, next) => {
 
     		// debug print of results
     		console.log("Recommendation Notification received:");
-		console.log(data);
-
 		outres = [];
 		parsedRes = JSON.parse(data);
 		for (r in parsedRes["results"]["addedresults"]["bindings"]){
-		    outres.push({"title": parsedRes["results"]["addedresults"]["bindings"][r]["title"]["value"],
-				 "url": parsedRes["results"]["addedresults"]["bindings"][r]["audioFile"]["value"]})
+		    if (parsedRes["results"]["addedresults"]["bindings"][r]["title"] !== undefined){
+			outres.push({"title": parsedRes["results"]["addedresults"]["bindings"][r]["title"]["value"],
+				     "url": parsedRes["results"]["addedresults"]["bindings"][r]["audioFile"]["value"]})
+		    }
 		}		
 		
 		// reply to the client

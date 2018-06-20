@@ -1,10 +1,10 @@
 parameters:
-  host: "localhost"
+  host: "wot.arces.unibo.it"
   ports: 
     http: 8000
-    https: 8443
+    https: 8447
     ws: 9000
-    wss: 9443
+    wss: 9447
   paths: 
     query: "/query"
     update: "/update"
@@ -181,12 +181,14 @@ queries:
                ?instance wot:hasCompletionTimestamp ?timestamp .
                ?outputData dul:hasDataValue ?graph .
                GRAPH ?graph {
+	         OPTIONAL {
                  ?rec rdf:type rec:Recommendation .
                  ?audioClip rdf:type ac:AudioClip .
                  ?audioClip rec:recommended_in ?rec .                 
                  ?audioClip dc:title ?title .
                  ?audioClip ac:available_as ?audioFile .
-                 ?audioFile rdf:type ac:AudioFile .                 
+                 ?audioFile rdf:type ac:AudioFile .                
+		 }
                }            
              }"
     forcedBindings:
