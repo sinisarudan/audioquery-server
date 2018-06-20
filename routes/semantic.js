@@ -20,6 +20,8 @@ router.all('*', (req, resp, next) => {
     // debug print
     console.log("Invoked Semantic processor");
 
+    req.setTimeout(600000);
+    
     // generate a random request number
     reqid = uuidv4();
     

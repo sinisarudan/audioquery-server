@@ -16,7 +16,6 @@ var rooms = require('./routes/room');
 
 var app = express();
 var server = require('http').Server(app);
-server.timeout = 90;
 // var io = require('socket.io')(server); // Add this here
 var io = require('socket.io')(server); // Add this here
 
