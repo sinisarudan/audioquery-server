@@ -195,6 +195,7 @@ $scope.player = function(itemid) {
 	    // request recommendation!
 	    $.ajax({
 		url: '/semantic',
+		timeout: 0,
 		dataType: 'json',
 		type: 'post',
 		contentType: 'application/json',
@@ -202,6 +203,9 @@ $scope.player = function(itemid) {
 		processData: false,
 		success: function( data, textStatus, jQxhr ){
 		    console.log(data);
+
+		    // test
+		    $scope.recommendations = data;
 		    
 		    // write recommendations, if any
 		    if (data.length > 0){
@@ -354,7 +358,7 @@ $scope.changevol = function(val){
 
 
 }
-
+    
 
 //recorder from thomas vassalo
 
