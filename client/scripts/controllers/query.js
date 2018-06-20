@@ -547,6 +547,10 @@ app.controller('chatController', ['$scope', '$window', '$http', '$location', '$f
 
  var socket = io();
  startChat();
+
+  $scope.languages = [{ name: "pt", id: 1 }, { name: "en", id: 2 }, { name: "it", id: 3 }, { name: "sp", id: 4 }];
+  $scope.selectedOption = $scope.languages[1];
+
 // var socket = io.connect( "http://localhost:3000");
 
  // var socket = io('//localhost:3000');

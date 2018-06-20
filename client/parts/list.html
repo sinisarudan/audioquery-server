@@ -1,20 +1,25 @@
 <section id="playlist">
+  <div id="audiomenu">
+    <input type="range" min="0" value="0.5" max="1" step="any" id="mastervol" ng-model="mastervol" ng-change="changevol(mastervol)"></input><span class="infos smalltext"> master vol: {{mastervol | number: 2}} </span> 
+
+  </div>
+
+  <div id="audios" class="body">
 
 
-  <div id="audios">
 
-    <input type="range" min="0" value="0.5" max="1" step="any" id="mastervol" ng-model="mastervol" ng-change="changevol(mastervol)"></input><span class="infos smalltext"> master vol: {{mastervol | number: 2}} </span>  </p>
+    
 
            <div ng-repeat="sound in sounds track by sound.playerid" class="players">
                <ass-player audiodata="sound"></ass-player>
                <!--<button ng-click="sound.splice($index,1)">X</button>  -->
             </div>
-  </div>
 
 
   <div id="recList">
     <h5 ng-show="recordings">Recordings</h5>
     <ul id="recordingslist"></ul>
+  </div>
   </div>
 
 
@@ -33,7 +38,7 @@
                     <button ng-hide="!recording" class="next-pag fa fa-stop" ng-click="stopRecording(); recording = false; recordings = true"></button>
                 </div><br>
               <a ng-hide=""> </a>
-              <div id="results">
+              <div id="results" class="body">
               <div>
 
 
