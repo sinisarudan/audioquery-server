@@ -1,3 +1,2 @@
 #!/bin/bash
-FREESOUND_KEY=putyourkeyhere \
-npm start
+JAMENDO_KEY=yourkey EUROPEANA_KEY=yourkey FREESOUND_KEY=yourkey npm start

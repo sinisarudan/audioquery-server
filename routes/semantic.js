@@ -40,12 +40,16 @@ router.all('*', (req, resp, next) => {
 	// read the query for content provider cp
 	try {
 
+	    // get the variable
+	    varName = cp.toUpperCase() + "_KEY";
+	    key = process.env[varName];
+	    
 	    // get the query
 	    queryFile = contentProviders[cp]["mappings"]["songs_by_name"]["query"]
 	    query = fs.readFileSync(queryFile, "utf-8");
 
 	    // replace token and keywords
-	    query = query.replace(/\$token/g, contentProviders[cp]["key"]).replace("$pattern", escape(keywords));
+	    query = query.replace(/\$token/g, key).replace("$pattern", escape(keywords));
 	    console.log(query)
 
 	    // promise for sparql-generate request
