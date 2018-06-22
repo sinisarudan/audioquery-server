@@ -203,12 +203,14 @@ $scope.player = function(itemid) {
 		success: function( data, textStatus, jQxhr ){
 		    console.log(data);
 		    textField = document.getElementById("recommendations");
-		    textField.innerHTML = "";
-		    for (r in data){
-			console.log(r)
-			textField.innerHTML += data[r]["title"];
+		    if (textField !== undefined){
+			textField.innerHTML = "";
+			for (r in data){
+			    console.log(r)
+			    textField.innerHTML += data[r] + "<br>";
+			}
+			console.log("End");
 		    }
-		    console.log("End");
 		},
 		error: function( jqXhr, textStatus, errorThrown ){
 		    console.log( errorThrown );

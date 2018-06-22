@@ -1,0 +1,42 @@
+{
+    "sparql-generate":{
+	"host":"http://wot.arces.unibo.it:5000/sparqlgen"
+    },
+    "content-providers":{
+	"jamendo":{
+	    "key":"PUT_YOUR_KEY_HERE",	 
+	    "mappings":{
+		"songs_by_name": {
+		    "query":"sparql/jamendo-to-audiocommons/data-adapters/track-search-by-text.rq",
+		    "bindings":{}
+		},
+		"collections_by_name":{
+		    "query":"sparql/jamendo-to-audiocommons/data-adapters/playlist-search-by-text.rq",
+		    "bindings":{}
+		}
+	    }
+	},
+	"europeana":{
+	    "key":"PUT_YOUR_KEY_HERE",
+	    "mappings":{
+		"songs_by_name": {
+		    "query":"sparql/europeana-to-audiocommons/data-adapters/audio-search-by-text.rq",
+		    "bindings":{}
+		}
+	    }
+	},
+	"freesound":{
+	    "key":"PUT_YOUR_KEY_HERE",
+	    "mappings":{
+		"songs_by_name":{
+		    "query":"sparql/freesound-to-audiocommons/data-adapters/audio-search-by-text.rq",
+		    "bindings":{}
+		},
+		"collections_by_name":{
+		    "query":"sparql/freesound-to-audiocommons/data-adapters/pack-search-by-text.rq",
+		    "bindings":{}
+		}
+	    }
+	}
+    }
+}
