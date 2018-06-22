@@ -18,12 +18,10 @@ router.all('*', (req, resp, next) => {
     console.log("Invoked Semantic processor");
 
     // initial configuration
-    console.log(process.cwd())
     configFile = "sparql/mapping.json"
     configFileFD = fs.readFileSync(configFile);
     configFileDict = JSON.parse(configFileFD);
     sparqlGen = configFileDict["sparql-generate"]["host"];
-    console.log(sparqlGen);
     contentProviders = configFileDict["content-providers"];
 
     // initialize an rdf graph
@@ -37,7 +35,6 @@ router.all('*', (req, resp, next) => {
     
     // read queries    
     for (var cp in contentProviders){
-    	console.log(contentProviders[cp])
 	key = contentProviders[cp]["key"]
 
 	// read the query for content provider cp
@@ -48,7 +45,7 @@ router.all('*', (req, resp, next) => {
 	    query = fs.readFileSync(queryFile, "utf-8");
 
 	    // replace token and keywords
-	    query = query.replace(/\$token/g, contentProviders[cp]["key"]).replace("$pattern", escape(keywords));	   
+	    query = query.replace(/\$token/g, contentProviders[cp]["key"]).replace("$pattern", escape(keywords));
 	    console.log(query)
 
 	    // promise for sparql-generate request
@@ -59,13 +56,12 @@ router.all('*', (req, resp, next) => {
 			console.log("Error performing request to SPARQL-Generate");
 			reject("Error with request");
 		    } else {
-			console.log("Request to SPARQL-Generate succesful");
+			console.log("Request to SPARQL-Generate for " + cp + " succesful");
 			resolve(body);
 		    }
 		});
 	    }).then(
 		(data) => {
-		    console.log(data)
 		    return data
 			  }
 	    ).catch(
@@ -86,9 +82,7 @@ router.all('*', (req, resp, next) => {
 	    console.log("Promises completed!");
 
 	    // copy RDF results in the graph
-	    console.log(values.length)
 	    for (value in values){
-		console.log(values[value])
 	    	rdflib.parse(values[value], store, "http://example.org/something", 'text/n3');	
 	    }
 
@@ -96,7 +90,9 @@ router.all('*', (req, resp, next) => {
 	    var sparqlQuery = `PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX dc: <http://purl.org/dc/elements/1.1/>
             PREFIX ac: <http://audiocommons.org/ns/audiocommons#>
-	    SELECT ?clip ?title WHERE { ?clip rdf:type ac:AudioClip . ?clip dc:title ?title . }`;
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+	    SELECT ?clip ?title ?prov ?provURI WHERE { ?clip rdf:type ac:AudioClip . ?clip dc:title ?title . ?clip prov:wasAttributedTo ?provURI . ?provURI foaf:name ?prov . }`;
 	    var q = rdflib.SPARQLToQuery(sparqlQuery, false, store);
 	    p = new Promise(
 		function(resolve, reject){
@@ -104,7 +100,12 @@ router.all('*', (req, resp, next) => {
 		    var sqq = store.query(q,
 					  // on results
 					  function(result){
-	    				      o[result["?clip"]["value"]] = result["?title"]["value"];},
+	    				      o[result["?clip"]["value"]] = {
+						  "title":result["?title"]["value"],
+						  "prov":result["?prov"]["value"],
+						  "provURI":result["?provURI"]["value"]
+					      };
+					  },
 
 					  // fetcher
 					  function(){},
@@ -115,7 +116,6 @@ router.all('*', (req, resp, next) => {
 	    ).then(
 		(data) => {
 		    console.log("Ready to return data!");
-		    console.log(data)
 		    resp.writeHead("200", {'Content-Type':'text/plain'});
 		    resp.write(JSON.stringify(data));
 		    resp.end();
@@ -129,7 +129,7 @@ router.all('*', (req, resp, next) => {
 	   
 	}
     ).catch(
-	(data) => { console.log("ERROR WITH PROMISES") }
+	(data) => { console.log("Error with promises") }
     );    
 
     req.on('data', (d) => { console.log("DATA"); });

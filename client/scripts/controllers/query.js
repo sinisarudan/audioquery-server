@@ -203,11 +203,11 @@ $scope.player = function(itemid) {
 		success: function( data, textStatus, jQxhr ){
 		    console.log(data);
 		    textField = document.getElementById("recommendations");
-		    if (textField !== undefined){
+		    if ((textField !== null) && (textField !== undefined)){
 			textField.innerHTML = "";
 			for (r in data){
 			    console.log(r)
-			    textField.innerHTML += data[r] + "<br>";
+			    textField.innerHTML += "<a target=1 href='" + r + "'>" + data[r]["title"] + "</a> (provided by <a href='" + data[r]["provURI"] + "'>" + data[r]["prov"] + "</a>) <br>";
 			}
 			console.log("End");
 		    }
