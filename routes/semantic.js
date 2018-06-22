@@ -116,6 +116,7 @@ router.all('*', (req, resp, next) => {
 	    ).then(
 		(data) => {
 		    console.log("Ready to return data!");
+		    console.log(data);
 		    resp.writeHead("200", {'Content-Type':'text/plain'});
 		    resp.write(JSON.stringify(data));
 		    resp.end();
