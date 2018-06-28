@@ -9,6 +9,7 @@ var createPlayer = require('web-audio-player');
 var index = require('./routes/index');
 
 
+var translationApiRouter = require('./routes/translation');
 var freesoundApiRouter = require('./routes/freesound');
 var semantic = require('./routes/semantic');
 var users = require('./routes/users');
@@ -40,6 +41,7 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'node_modules', 'audioquery')));
 app.use(express.static(path.join(__dirname, 'client')));
 
+app.use('/translation', translationApiRouter);
 app.use('/freesound', freesoundApiRouter);
 app.use('/semantic', semantic);
 app.use('/users', users);
