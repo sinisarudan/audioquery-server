@@ -14,15 +14,36 @@ $scope.about= 'estreito';
 
 
 //$scope.query = 'gfun';
+    
 
+    $scope.$watch('query', function() {
 
+	// translation: get input language
+	tc = document.getElementById("translateCheck");
+	if ((tc !== undefined) && (tc !== null)){
 
-$scope.$watch('query', function() {
-  // console.log("making query");
-  $scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
-  //$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
+	    if (tc.checked){
+		
+		// debug print
+		console.log("Translating keyword!")
+	    
+		// API call
+		$scope.makeTranslationQuery("/translation/" + $scope.query, $scope.query);
+		
+	    }
+	}
+	
+	// console.log("making query");
+	$scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
+	//$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
-});
+    });
+
+    $scope.searchTranslatedKeyword = function(){
+	console.log($('#mainsearch'));
+	tk = document.getElementById("translations").innerHTML;
+	$scope.query = tk;
+    }
 
 
 $scope.trustSrc = function(src) {
@@ -62,6 +83,52 @@ $scope.singlequery = function(soundid) {
 
 }
 
+    $scope.makeTranslationQuery = function(urlbase, query) {
+
+    console.log("[DVL] makeTranslationQuery");
+    console.log(urlbase)
+
+    var req = {
+	method: 'GET',
+	url: urlbase,
+	headers: {
+	    'Content-Type': 'application/json',
+	    'app_id': "ef0a2bd1",
+	    'app_key': "497f43eacd7fc39f621ee8e9ae851315"
+	}	
+    };
+
+    $.ajax(req).
+    	then(function(response) {
+
+	    
+            // when the response is available
+	    // try to parse the response as a JSON message
+	    console.log(response)
+	    
+	    try {
+		jr = JSON.parse(response);
+		t = document.getElementById("translations");
+		if ((t !== undefined) && (t !== null)){
+		    for (word in jr["text"]){		    
+			if ((jr["text"][word] !== query) && (jr["text"][word] !== undefined)){			    
+			    t.innerHTML = jr["text"][word];			
+			}		    
+		    }
+		}
+	    } catch(err) {
+		console.log(err)
+		console.log("No translations available")
+	    }
+	    
+    	}, function(response) {
+            // error.	    
+            //ok
+    	}, function(response) {
+            // error.
+	    
+    	});    
+}
 
 
 $scope.makequery = function(urlbase) {
@@ -655,9 +722,7 @@ setUsername();
       $messageBodyDiv.append($wordDiv);
       $messageBodyDiv.append($());
     };
-
-      
-
+     
     var typingClass = data.typing ? 'typing' : '';
     var $messageDiv = $('<li class="message"/>')
       .data('username', data.username)
@@ -667,7 +732,7 @@ setUsername();
     addMessageElement($messageDiv, options);
     $('.messageBody span').click(function(){
           $('#mainsearch').val(this.textContent);
-          $('#mainsearch').change();
+        $('#mainsearch').change();
 
 
         //$scope.query = this.textContent;

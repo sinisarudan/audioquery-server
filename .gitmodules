@@ -1,0 +1,9 @@
+[submodule "sparql/freesound-to-audiocommons"]
+	path = sparql/freesound-to-audiocommons
+	url = https://github.com/miguel76/freesound-to-audiocommons
+[submodule "sparql/jamendo-to-audiocommons"]
+	path = sparql/jamendo-to-audiocommons
+	url = https://gitlab.com/desmovalvo/jamendo-to-audiocommons
+[submodule "sparql/europeana-to-audiocommons"]
+	path = sparql/europeana-to-audiocommons
+	url = https://gitlab.com/desmovalvo/europeana-to-audiocommons
