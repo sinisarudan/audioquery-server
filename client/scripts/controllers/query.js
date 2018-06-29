@@ -1,8 +1,9 @@
 app.controller('queryController', ['$scope','$window', '$http', '$location', '$filter', '$sce', '$interval',  function ($scope, $window, $http, $location, $filter, $sce, $interval ) {
 
-
-var sounds = [];
-$scope.sounds = sounds;
+    $scope.languages = [ { name: "de", id: 1 }, { name: "bg", id: 2 }, { name: "hu", id: 3 }, { name: "nl", id: 4 }, { name: "el", id: 5 }, { name: "ka", id: 6 }, { name: "da", id: 7 }, { name: "it", id: 8 }, { name: "es", id: 9 }, { name: "ja", id: 10 }, { name: "fr", id: 11 }, { name: "fi", id: 12 }, { name: "ur", id: 13 }, { name: "tr", id: 14 }, { name: "pt", id: 15 }, { name: "ro", id: 16 }, { name: "ru", id: 17 } ];
+    $scope.selectedOption = $scope.languages[1];
+    var sounds = [];
+    $scope.sounds = sounds;
 
 // Counter used to generate new player ids
 var playersCounter = 0;
@@ -19,30 +20,27 @@ $scope.about= 'estreito';
     $scope.$watch('query', function() {
 
 	// translation: get input language
-	tc = document.getElementById("translateCheck");
-	if ((tc !== undefined) && (tc !== null)){
-
-	    if (tc.checked){
-		
-		// debug print
-		console.log("Translating keyword!")
+	console.log("Translating keyword!")
+	try {
+	    console.log("***" + $scope.query + "***");
 	    
-		// API call
-		$scope.makeTranslationQuery("/translation/" + $scope.query, $scope.query);
-		
-	    }
+	    if (($scope.query !== "") && ($scope.query !== undefined))
+		$scope.makeTranslationQuery("/translation/" + $scope.selectedOption["name"] + "/" + $scope.query, $scope.query);
+	} catch(err){
+	    console.log("Translation not ready");
+	    console.log(err)
 	}
 	
-	// console.log("making query");
+    	// console.log("making query");
 	$scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
 	//$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
 
     });
 
     $scope.searchTranslatedKeyword = function(){
-	console.log($('#mainsearch'));
 	tk = document.getElementById("translations").innerHTML;
 	$scope.query = tk;
+	document.getElementById("translations").innerHTML = "";
     }
 
 
@@ -116,9 +114,14 @@ $scope.singlequery = function(soundid) {
 			}		    
 		    }
 		}
+		else {
+		    t.innerHTML = "";
+		}
 	    } catch(err) {
 		console.log(err)
 		console.log("No translations available")
+		t = document.getElementById("translations");
+		t.innerHTML = "";
 	    }
 	    
     	}, function(response) {
