@@ -351,14 +351,24 @@ $scope.logger2 = function(message) {
 };
 
 $scope.updateAddress = function() {
-  var curadress = $location.path()+"/"; 
-  var curadress = curadress.split('sounds=')[0];
+
+var curadress = $location.path();
+
+if (curadress === "/"){
+ curadress = $location.path();
+ console.log(curadress + "slash");
+}else {
+  curadress = $location.path() + "/";
+  console.log(curadress + "no slash");
+}
+  curadress = curadress.split('sounds=')[0];
   var newadress = $scope.sounds.length > 0 ? 'sounds=' : '';
   for (var position = 0; position < $scope.sounds.length; position++) {
     newadress += (position > 0 ? ',' : '') + $scope.sounds[position].id;
   }
 
-  var newadress = curadress + newadress;
+  newadress = curadress + newadress;
+
   $location.path(newadress, false);
 }
 
