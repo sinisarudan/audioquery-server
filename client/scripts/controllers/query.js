@@ -351,13 +351,12 @@ $scope.logger2 = function(message) {
 };
 
 $scope.updateAddress = function() {
-  var curadress = $location.path(); 
+  var curadress = $location.path()+"/"; 
   var curadress = curadress.split('sounds=')[0];
   var newadress = $scope.sounds.length > 0 ? 'sounds=' : '';
   for (var position = 0; position < $scope.sounds.length; position++) {
     newadress += (position > 0 ? ',' : '') + $scope.sounds[position].id;
   }
-
 
   var newadress = curadress + newadress;
   $location.path(newadress, false);
