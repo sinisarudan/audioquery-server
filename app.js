@@ -47,7 +47,9 @@ app.use('/users', users);
 app.use('/chat', rooms);
 app.use('/', index);
 
+
 app.get('/fs', () => console.log('fs'));
+app.get('/chat', () => console.log('chat'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

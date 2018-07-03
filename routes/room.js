@@ -14,6 +14,8 @@ try {
     var numUsers = 0;
     initialized = true;
 
+  // var rooms = ['room1','room2','room3'];
+
     res.io.on('connection', function (socket) {
       //var addedUser = false;
       var addedUser = false;
@@ -36,6 +38,20 @@ try {
         socket.username = username;
         ++numUsers;
         addedUser = true;
+
+        /*
+        // store the room name in the socket session for this client
+        socket.room = 'room1';
+        // send client to room 1
+        socket.join('room1');
+
+        // echo to client they've connected
+        socket.emit('updatechat', 'SERVER', 'you have connected to room1');
+        // echo to room 1 that a person has connected to their room
+        socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
+        socket.emit('updaterooms', rooms, 'room1');
+        */
+        
         socket.emit('login', {
           numUsers: numUsers
         });

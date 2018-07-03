@@ -47,6 +47,14 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.html5Mode(true);
     $routeProvider
+    .when('/chat/:rooms/:sounds', {
+            templateUrl: 'parts/chat.html',
+            controller: 'queryController'
+        })
+    .when('/chat/:sounds', {
+            templateUrl: 'parts/chat.html',
+            controller: 'queryController'
+        })
       .when('/chat', {
             templateUrl: 'parts/chat.html',
             controller: 'queryController'
