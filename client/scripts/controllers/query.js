@@ -1,7 +1,8 @@
 app.controller('queryController', ['$scope','$window', '$http', '$location', '$filter', '$sce', '$interval',  function ($scope, $window, $http, $location, $filter, $sce, $interval ) {
 
     $scope.languages = [ { name: "de", id: 1 }, { name: "bg", id: 2 }, { name: "hu", id: 3 }, { name: "nl", id: 4 }, { name: "el", id: 5 }, { name: "ka", id: 6 }, { name: "da", id: 7 }, { name: "it", id: 8 }, { name: "es", id: 9 }, { name: "ja", id: 10 }, { name: "fr", id: 11 }, { name: "fi", id: 12 }, { name: "ur", id: 13 }, { name: "tr", id: 14 }, { name: "pt", id: 15 }, { name: "ro", id: 16 }, { name: "ru", id: 17 } ];
-    $scope.selectedOption = $scope.languages[1];
+    $scope.selectedLangIn = $scope.languages[1];
+    $scope.selectedLangOut = $scope.languages[1];
     var sounds = [];
     $scope.sounds = sounds;
 
@@ -17,15 +18,30 @@ $scope.about= 'estreito';
 //$scope.query = 'gfun';
     
 
+    $scope.$watch('selectedLangOut', function(){
+	q = $scope.query;
+	lin = $scope.selectedLangIn;
+	lout = $scope.selectedLangOut;
+	if (q !== undefined)
+	    $scope.makeTranslationQuery("/translation/" + lin["name"] + "/" + lout["name"] + "/" + q, q);
+    })
+
+    $scope.$watch('selectedLangIn', function(){
+	q = $scope.query;
+	lin = $scope.selectedLangIn;
+	lout = $scope.selectedLangOut;
+	if (q !== undefined)
+	    $scope.makeTranslationQuery("/translation/" + lin["name"] + "/" + lout["name"] + "/" + q, q);
+    })
+    
     $scope.$watch('query', function() {
 
-	// translation: get input language
 	console.log("Translating keyword!")
 	try {
 	    console.log("***" + $scope.query + "***");
 	    
 	    if (($scope.query !== "") && ($scope.query !== undefined))
-		$scope.makeTranslationQuery("/translation/" + $scope.selectedOption["name"] + "/" + $scope.query, $scope.query);
+		$scope.makeTranslationQuery("/translation/" + $scope.selectedLangIn["name"] + "/" + $scope.selectedLangOut["name"] + "/" + $scope.query, $scope.query);
 	} catch(err){
 	    console.log("Translation not ready");
 	    console.log(err)
@@ -83,8 +99,15 @@ $scope.singlequery = function(soundid) {
 
     $scope.makeTranslationQuery = function(urlbase, query) {
 
-    console.log("[DVL] makeTranslationQuery");
-    console.log(urlbase)
+	console.log("[DVL] makeTranslationQuery");
+	console.log(urlbase)
+
+	try{
+	    t = document.getElementById("translations");
+	    t.innerHTML = "";
+	} catch(err){
+	    console.log(err);
+	}
 
     var req = {
 	method: 'GET',
@@ -98,7 +121,6 @@ $scope.singlequery = function(soundid) {
 
     $.ajax(req).
     	then(function(response) {
-
 	    
             // when the response is available
 	    // try to parse the response as a JSON message
@@ -109,9 +131,12 @@ $scope.singlequery = function(soundid) {
 		t = document.getElementById("translations");
 		if ((t !== undefined) && (t !== null)){
 		    for (word in jr["text"]){		    
-			if ((jr["text"][word] !== query) && (jr["text"][word] !== undefined)){			    
+			if (jr["text"][word] !== undefined) {
 			    t.innerHTML = jr["text"][word];			
-			}		    
+			}
+			else {
+			    t.innerHTML = "";
+			}
 		    }
 		}
 		else {

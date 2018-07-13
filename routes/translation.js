@@ -19,9 +19,10 @@ const stringFromQuery = (queryObj) => {
 router.all('*', (req, resp, next) => {
 
     // prepare request path
-    lang = req.url.split("/")[1];
-    word = req.url.split("/")[2];
-    finalURI = yandexPath + "?key=" + yandexKey + "&text=" + word + "&lang=" + lang + "-en";
+    langIn = req.url.split("/")[1];
+    langOut = req.url.split("/")[2];
+    word = req.url.split("/")[3];
+    finalURI = yandexPath + "?key=" + yandexKey + "&text=" + word + "&lang=" + langIn + "-" + langOut;
 
     // setting request options
     const options = {
