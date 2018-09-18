@@ -16,7 +16,7 @@ $scope.about= 'estreito';
 
 
 //$scope.query = 'gfun';
-    
+
 
     $scope.$watch('selectedLangOut', function(){
 	q = $scope.query;
@@ -33,20 +33,20 @@ $scope.about= 'estreito';
 	if (q !== undefined)
 	    $scope.makeTranslationQuery("/translation/" + lin["name"] + "/" + lout["name"] + "/" + q, q);
     })
-    
+
     $scope.$watch('query', function() {
 
 	console.log("Translating keyword!")
 	try {
 	    console.log("***" + $scope.query + "***");
-	    
+
 	    if (($scope.query !== "") && ($scope.query !== undefined))
 		$scope.makeTranslationQuery("/translation/" + $scope.selectedLangIn["name"] + "/" + $scope.selectedLangOut["name"] + "/" + $scope.query, $scope.query);
 	} catch(err){
 	    console.log("Translation not ready");
 	    console.log(err)
 	}
-	
+
     	// console.log("making query");
 	$scope.makequery('/freesound/search/text/?query=' + $scope.query + '&fields=id,name,previews,tags,images,duration,license&filter=license:("Creative Commons 0" OR "Attribution")&page_size=40');
 	//$scope.gifquery('http://api.giphy.com/v1/gifs/search?q='+ $scope.query +'&api_key=E6C8oBZ2WghTaR2HujVpSZJML1fvTpm3&limit=5');
@@ -116,23 +116,23 @@ $scope.singlequery = function(soundid) {
 	    'Content-Type': 'application/json',
 	    'app_id': "ef0a2bd1",
 	    'app_key': "497f43eacd7fc39f621ee8e9ae851315"
-	}	
+	}
     };
 
     $.ajax(req).
     	then(function(response) {
-	    
+
             // when the response is available
 	    // try to parse the response as a JSON message
 	    console.log(response)
-	    
+
 	    try {
 		jr = JSON.parse(response);
 		t = document.getElementById("translations");
 		if ((t !== undefined) && (t !== null)){
-		    for (word in jr["text"]){		    
+		    for (word in jr["text"]){
 			if (jr["text"][word] !== undefined) {
-			    t.innerHTML = jr["text"][word];			
+			    t.innerHTML = jr["text"][word];
 			}
 			else {
 			    t.innerHTML = "";
@@ -148,14 +148,14 @@ $scope.singlequery = function(soundid) {
 		t = document.getElementById("translations");
 		t.innerHTML = "";
 	    }
-	    
+
     	}, function(response) {
-            // error.	    
+            // error.
             //ok
     	}, function(response) {
             // error.
-	    
-    	});    
+
+    	});
 }
 
 
@@ -287,7 +287,7 @@ $scope.player = function(itemid) {
 	    // 	       console.log(data)
 	    // 	   }
 	    // 	  );
-	    
+
 	    $.ajax({
 		url: '/semantic',
 		dataType: 'json',
@@ -309,7 +309,7 @@ $scope.player = function(itemid) {
 		    console.log( errorThrown );
 		}
 	    });
-	    
+
 	    // for (tag in $scope.results[el]["tags"]){
 
 	    // 	// t = $scope.results[el]["tags"][tag];
@@ -319,7 +319,7 @@ $scope.player = function(itemid) {
 	}
     }
 
-    
+
   //adding to sounds
   $scope.sounds.unshift({id: itemid, newsound: 1, playerid: playerid});
 
@@ -725,7 +725,7 @@ setUsername();
       addChatMessage({
         username: username,
         message: message
-      }, { prepend: true });
+      }, { prepend: false });
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', message);
     }
@@ -759,7 +759,7 @@ setUsername();
       $messageBodyDiv.append($wordDiv);
       $messageBodyDiv.append($());
     };
-     
+
     var typingClass = data.typing ? 'typing' : '';
     var $messageDiv = $('<li class="message"/>')
       .data('username', data.username)
@@ -774,14 +774,14 @@ setUsername();
 
         //$scope.query = this.textContent;
         console.log(this.textContent);
-      });    
+      });
   }
 
   // Adds the visual chat typing message
   function addChatTyping (data) {
     data.typing = true;
     data.message = 'is typing';
-    addChatMessage(data, { prepend: true });
+    addChatMessage(data, { prepend: false });
   }
 
   // Removes the visual chat typing message
@@ -912,14 +912,14 @@ setUsername();
     // Display the welcome message
     var message = "hello";
     // log(message, {
-    //   prepend: true
+    //   prepend: false
     // });
     // addParticipantsMessage(data);
   });
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
-    addChatMessage(data, { prepend: true });
+    addChatMessage(data, { prepend: false });
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
