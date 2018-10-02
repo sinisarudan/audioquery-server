@@ -8,6 +8,10 @@
 + You can still continue to program in old AngularJS, but that is not recommended :)
 + we can incrementally migrate to new code
 
+## Provide Audio Commons access
+
++ Integrate Javascript library for access to the Audio Commons ecosystem
+
 ## Advance Models of pseudo-real-time performance
 
 + Queued/Delayed/Pseudo real-time performance
